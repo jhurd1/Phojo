@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+// This is Jamie Hurd testing a merge conflict.
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
