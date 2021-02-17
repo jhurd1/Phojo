@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-
-//change comment for initializing local branch "dev"
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
