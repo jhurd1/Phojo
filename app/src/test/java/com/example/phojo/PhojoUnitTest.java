@@ -1,18 +1,22 @@
 package com.example.phojo;
-import android.content.Context;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-//import org.mockito.Mock;
-//import org.mockito.junit.MockitoJUnitRunner;
-import android.content.Context;
-//import androidx.test.core.app.ApplicationProvider;
-import org.junit.Test;
-//import static com.google.common.truth.Truth.assertThat;
-import org.junit.runner.RunWith;
+/*import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import androidx.test.core.app.ApplicationProvider;
+import static com.google.common.truth.Truth.assertThat;*/
+
 
 //@RunWith(MockitoJUnitRunner.class);
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
 public class PhojoUnitTest {
+    // tested the following method for syntactical correctness
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
+    }
     /*private static final String FAKE_STRING = "HELLO_WORLD";
     private Context context = ApplicationProvider.getApplicationContext();
 
