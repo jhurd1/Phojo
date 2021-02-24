@@ -17,6 +17,13 @@ public class PhojoUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void division_isCorrect() {
+        assertEquals(12, 24 / 2);
+    }
+
+
     /*private static final String FAKE_STRING = "HELLO_WORLD";
     private Context context = ApplicationProvider.getApplicationContext();
 
@@ -30,7 +37,7 @@ public class PhojoUnitTest {
 
         // ...then the result should be the expected one.
         assertThat(result).isEqualTo(FAKE_STRING);
-    }*/
+    }
 
     //https://developer.android.com/training/testing/unit-testing/local-unit-tests.html#include
     // -framework-dependencies
