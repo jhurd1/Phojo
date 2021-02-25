@@ -21,4 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public String getTestString() {
         return testString;
     }
+
+    public String getHelloWorldString() {
+        return testString;
+    }
 }
