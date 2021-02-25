@@ -1,5 +1,6 @@
 package com.Phojo.unitTests;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.view.View;
 import androidx.test.core.app.ApplicationProvider;
@@ -20,7 +21,7 @@ public class MainActivityTest
     /***********************************
      * PRIVATE MEMBERS
      **********************************/
-    private MainActivity mActivity = null;
+    private View mActivity = null;
     private static final String FAKE_STRING = "test string";
     public boolean match = false;
     private Context context = ApplicationProvider.getApplicationContext();
@@ -53,20 +54,24 @@ public class MainActivityTest
         return match;
     }
 
-
+    /***********************************
+     * Test successful launch of main
+     * activity.
+     **********************************/
     @Before
     public void setUp() throws Exception
     {
         // to set up the test, get the activity
-        //mActivity = mActivityTestRule.getActivity();
+        MainActivity mActivityTestRule = new MainActivity();
+        mActivity = mActivityTestRule.getActivity();
     }
 
     @Test
     public void testLaunch()
     {
         //Since we're testing a test for the id of the ViewText in MainActivity
-        //View view = mActivity.findViewById(R.id.textForTesting);
-        //assertNotNull(view);
+        View view = mActivity;
+        assertNotNull(view);
     }
 
     @After
