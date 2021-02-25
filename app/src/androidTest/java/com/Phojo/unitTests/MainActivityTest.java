@@ -1,16 +1,12 @@
 package com.Phojo.unitTests;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.view.View;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.phojo.MainActivity;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /***********************************
@@ -27,7 +23,7 @@ public class MainActivityTest
     private Context context = ApplicationProvider.getApplicationContext();
 
     /***********************************
-     * Simple addition test
+     * Simple math test
      **********************************/
     @Test
     public void addition_isCorrect() {
@@ -57,6 +53,9 @@ public class MainActivityTest
     /***********************************
      * Test successful launch of main
      * activity.
+     * Adapted from:
+     * https://www.youtube.com/watch?v=
+     * ..._TR6QcRozAg&ab_channel=LearnShareAnythingAnyone
      **********************************/
     @Before
     public void setUp() throws Exception
