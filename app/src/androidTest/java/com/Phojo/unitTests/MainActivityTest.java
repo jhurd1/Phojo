@@ -2,25 +2,41 @@ package com.Phojo.unitTests;
 
 import android.content.Context;
 import android.view.View;
-
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import com.example.phojo.MainActivity;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import static org.junit.Assert.*;
 
+/***********************************
+ * MAINACTIVITYTEST Class
+ **********************************/
 public class MainActivityTest
 {
+    /***********************************
+     * PRIVATE MEMBERS
+     **********************************/
+    private MainActivity mActivity = null;
     private static final String FAKE_STRING = "test string";
     public boolean match = false;
     private Context context = ApplicationProvider.getApplicationContext();
+
+    /***********************************
+     * Simple addition test
+     **********************************/
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
+    }
+
+    /***********************************
+     * Test reading a string from
+     * context
+     **********************************/
     @Test
     public void readStringFromContext_LocalizedString()
     {
@@ -36,7 +52,7 @@ public class MainActivityTest
         }
         return match;
     }
-    /*private MainActivity mActivity = null;
+
 
     @Before
     public void setUp() throws Exception
@@ -58,5 +74,5 @@ public class MainActivityTest
     {
         // to tear down, assign mActivity to null
         mActivity = null;
-    }*/
+    }
 }
