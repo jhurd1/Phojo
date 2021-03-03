@@ -125,5 +125,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
         Edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
         Edit.putString(TAG, ""); // replace "" with a variable holding the user's input
+
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
+        edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
+        edit.putString(TAG, ""); // replace "" with a variable holding the user's input
+        edit.apply();
     }
 }
