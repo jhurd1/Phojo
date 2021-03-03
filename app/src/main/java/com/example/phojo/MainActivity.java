@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,42 +13,56 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    /*private final String testString = "test real string";
+    private final String testString = "test real string";
     private static final String FIRSTNAME = "";
     private static final String LASTNAME = "";
     private static final String EMAIL = "";
     private static final String PASSWORD = "";
     private static final String TAG = "";
+    Context context = getActivity();
+    Resources res = getResources();
+    String[] userData = res.getStringArray(R.array.preference_file_key);
+    SharedPreferences sp = context.getSharedPreferences(
+            String.valueOf(res.getStringArray(R.array.preference_file_key)), Context.MODE_PRIVATE);
 
-    public MainActivity(Context context) {
+
+    public MainActivity(Context context)
+    {
     }
 
-    public MainActivity() {
+    public MainActivity()
+    {
 
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
-    public String getTestString() {
+    public String getTestString()
+    {
         return testString;
     }
 
-    public String getHelloWorldString() {
+    public String getHelloWorldString()
+    {
         return testString;
     }
 
-    public View getActivity() {
-        View view = null;
-        return view;
+    public Context getActivity()
+    {
+        Context c = null;
+        return c;
+        /*View view = null;
+        return view;*/
     }
-    protected void onClick(View view) {
+
 
         SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
-    }*/
+    }
 
     Button bLogout;
     EditText etFirstName, etMiddleName, etLastName, etUsername;
@@ -92,13 +107,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bLogout:
-                userLocalStore.clearUserData();
-                userLocalStore.setUserLoggedIn(false);
-                startActivity(new Intent(this, Login.class));
-                break;
+    public void onClick(View v){
+        switch(v.getId()){
+        case R.id.bLogout:
+        userLocalStore.clearUserData();
+        userLocalStore.setUserLoggedIn(false);
+        startActivity(new Intent(this,Login.class));
+        break;
         }
+    }
+    protected void onClick(Context c) // changed to context from view
+    {
+        //SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor Edit=sp.edit();
+        Edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
+        Edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
+        Edit.putString(TAG, ""); // replace "" with a variable holding the user's input
     }
 }
