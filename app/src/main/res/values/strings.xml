@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Phojo</string>
+    <string-array name="preference_file_key">
+        <item>FIRSTNAME</item>
+        <item>LASTNAME</item>
+        <item>EMAIL</item>
+        <item>PASSWORD</item>
+        <item>TAG</item>
+    </string-array>
 </resources>
