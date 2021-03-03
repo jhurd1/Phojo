@@ -60,14 +60,13 @@ public class MainActivity extends AppCompatActivity
 
     protected void onClick(Context c) // changed to context from view
     {
-
         //SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor Edit=sp.edit();
-        Edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
-        Edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
-        Edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
-        Edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
-        Edit.putString(TAG, ""); // replace "" with a variable holding the user's input
-
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
+        edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
+        edit.putString(TAG, ""); // replace "" with a variable holding the user's input
+        edit.apply();
     }
 }
