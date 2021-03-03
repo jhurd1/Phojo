@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity
 
         //SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
         SharedPreferences.Editor Edit=sp.edit();
-        Edit.putString(FIRSTNAME, "");
-        Edit.putString(LASTNAME, "");
-        Edit.putString(EMAIL, "");
-        Edit.putString(PASSWORD, "");
-        Edit.putString(TAG, "");
+        Edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
+        Edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
+        Edit.putString(TAG, ""); // replace "" with a variable holding the user's input
 
     }
 }
