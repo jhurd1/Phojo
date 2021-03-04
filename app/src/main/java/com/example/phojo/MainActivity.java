@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences sp = context.getSharedPreferences(
             String.valueOf(res.getStringArray(R.array.preference_file_key)), Context.MODE_PRIVATE);
 
-    Button bLogout;
+    Button createAccount;
     EditText etFirstName, etMiddleName, etLastName, etUsername;
     UserLocalStore userLocalStore;
 
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etUsername = (EditText) findViewById(R.id.etUsername);
-        bLogout = (Button) findViewById(R.id.createAccount);
+        createAccount = (Button) findViewById(R.id.createAccount);
 
-        bLogout.setOnClickListener(this);
+        createAccount.setOnClickListener(this);
 
         userLocalStore = new UserLocalStore(this);
     }
@@ -134,4 +134,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //edit.putString(TAG, ""); // replace "" with a variable holding the user's input
         edit.apply();
     }
+
+    SharedPreferences loadSharedPreferences = getSharedPreferences("preference_file_key",
+            Context.MODE_PRIVATE);
+    EMAIL = loadSharedPreferences.getString("username", "");
+    PASSWORD = loadSharedPreferences.getString("password", "");
+
 }
