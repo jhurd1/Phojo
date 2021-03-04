@@ -81,7 +81,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+    /*private final String testString = "test real string";
+    private static final String FIRST_NAME = "";
+    private static final String LAST_NAME = "";
+    private static final String EMAIL = "";
+    private static final String PASSWORD = "";
+    private static final String TAG = "";
+    Context context = getActivity();
+    Resources res = getResources();
+    String[] userData = res.getStringArray(R.array.preference_file_key);
+    SharedPreferences sp = context.getSharedPreferences(
+            String.valueOf(res.getStringArray(R.array.preference_file_key)), Context.MODE_PRIVATE);
 
     /*
         public MainActivity(Context context)
@@ -105,10 +115,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return testString;
         }
 
+
         public String getHelloWorldString()
         {
             return testString;
         }
+
+    SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
+    }
+    protected void onRegisterClick(Context c) // changed to context from view
+        {
+        //SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor Edit=sp.edit();
+        Edit.putString(FIRST_NAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(LAST_NAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
+        Edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
+        Edit.putString(TAG, ""); // replace "" with a variable holding the user's input
+>>>>>>> fd7083404629fd377482d966ef2f33113186212f
 
         public Context getActivity()
         {
@@ -123,8 +147,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onClick(Context c) // changed to context from view
     {
         SharedPreferences.Editor edit = sp.edit();
+
         //edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
         //edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+
+        edit.putString(FIRST_NAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(LAST_NAME, ""); // replace "" with a variable holding the user's input
+
         edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
         edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
         //edit.putString(TAG, ""); // replace "" with a variable holding the user's input
