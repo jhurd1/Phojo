@@ -21,41 +21,41 @@
         android:text="TM"
         android:fontFamily="@font/Georgia" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:text="First Name"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"/>-->
 
-    <EditText
+    <!--<EditText
         android:id="@+id/etFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"/>-->
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:text="Middle Initial"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"/>-->
 
-    <EditText
+   <!-- <EditText
         android:id="@+id/etMiddleName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"/>-->
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:text="Last Name"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"/>-->
 
-    <EditText
+    <!--<EditText
         android:id="@+id/etLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"/>-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,16 +70,16 @@
         android:layout_marginBottom="10dp"/>
 
     <Button
-        android:id="@+id/bLogout"
-        android:text="Logout"
+        android:id="@+id/createAccount"
+        android:text="CREATE ACCOUNT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/first_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        android:fontFamily="@font/Georgia" />
+        android:fontFamily="@font/Georgia" />-->
 
 </RelativeLayout>
