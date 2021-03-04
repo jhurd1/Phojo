@@ -13,27 +13,9 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
-
-
-    //private static final String FIRST_NAME = "";
-    //private static final String LAST_NAME = "";
-    private static final String EMAIL = "";
-    private static final String PASSWORD = "";
-    //private static final String TAG = "";
-    Context context = getActivity(); // context lets new objects in on the program's state
-    Resources res = getResources();
-    String[] userData = res.getStringArray(R.array.preference_file_key);
-    SharedPreferences sp = context.getSharedPreferences(
-            String.valueOf(res.getStringArray(R.array.preference_file_key)), Context.MODE_PRIVATE);
-
-    Button createAccount;
+    Button bLogout;
     EditText etFirstName, etMiddleName, etLastName, etUsername;
     UserLocalStore userLocalStore;
-
-    private Context getActivity()
-    {
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +26,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etUsername = (EditText) findViewById(R.id.etUsername);
-        createAccount = (Button) findViewById(R.id.createAccount);
+        bLogout = (Button) findViewById(R.id.bLogout);
 
-        createAccount.setOnClickListener(this);
+        bLogout.setOnClickListener(this);
 
         userLocalStore = new UserLocalStore(this);
     }
@@ -76,16 +58,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.createAccount:
+            case R.id.bLogout:
                 userLocalStore.clearUserData();
                 userLocalStore.setUserLoggedIn(false);
                 startActivity(new Intent(this, Login.class));
                 break;
         }
     }
+    //The below code is commented out because it is for testing or it is redundant. I had put the shared preferences code in the UserLocalStore.java
     /*private final String testString = "test real string";
 
-    /*
         public MainActivity(Context context)
         {
         }
@@ -120,9 +102,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View view = null;
             return view;
         }
-    */
-    //SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
-    //}
+    SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
+    }
+    private static final String FIRST_NAME = "";
+    private static final String LAST_NAME = "";
+    private static final String EMAIL = "";
+    private static final String PASSWORD = "";
+    private static final String TAG = "";
+    Context context = getActivity(); // context lets new objects in on the program's state
+    Resources res = getResources();
+    String[] userData = res.getStringArray(R.array.preference_file_key);
+    SharedPreferences sp = context.getSharedPreferences(
+            String.valueOf(res.getStringArray(R.array.preference_file_key)), Context.MODE_PRIVATE);
+
+    private Context getActivity()
+    {
+
+    }
+
     protected void onClick(Context c) // changed to context from view
     {
         SharedPreferences.Editor edit = sp.edit();
@@ -139,5 +136,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Context.MODE_PRIVATE);
     EMAIL = loadSharedPreferences.getString("username", "");
     PASSWORD = loadSharedPreferences.getString("password", "");
-
+*/
 }
