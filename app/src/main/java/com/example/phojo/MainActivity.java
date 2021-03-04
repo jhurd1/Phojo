@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 }
     /*private final String testString = "test real string";
-    private static final String FIRSTNAME = "";
-    private static final String LASTNAME = "";
+    private static final String FIRST_NAME = "";
+    private static final String LAST_NAME = "";
     private static final String EMAIL = "";
     private static final String PASSWORD = "";
     private static final String TAG = "";
@@ -116,19 +116,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
     }
-    protected void onClick(Context c) // changed to context from view
+    protected void onRegisterClick(Context c) // changed to context from view
         {
         //SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
         SharedPreferences.Editor Edit=sp.edit();
-        Edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
-        Edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(FIRST_NAME, ""); // replace "" with a variable holding the user's input
+        Edit.putString(LAST_NAME, ""); // replace "" with a variable holding the user's input
         Edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
         Edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
         Edit.putString(TAG, ""); // replace "" with a variable holding the user's input
 
         SharedPreferences.Editor edit = sp.edit();
-        edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
-        edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(FIRST_NAME, ""); // replace "" with a variable holding the user's input
+        edit.putString(LAST_NAME, ""); // replace "" with a variable holding the user's input
         edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
         edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
         edit.putString(TAG, ""); // replace "" with a variable holding the user's input
