@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 {
 
 
-    //private static final String FIRSTNAME = "";
-    //private static final String LASTNAME = "";
+    //private static final String FIRST_NAME = "";
+    //private static final String LAST_NAME = "";
     private static final String EMAIL = "";
     private static final String PASSWORD = "";
     //private static final String TAG = "";
@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onClick(Context c) // changed to context from view
     {
         SharedPreferences.Editor edit = sp.edit();
+
         //edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
         //edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
         edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
