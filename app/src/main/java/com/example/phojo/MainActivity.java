@@ -14,8 +14,8 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    //private static final String FIRSTNAME = "";
-    //private static final String LASTNAME = "";
+    //private static final String FIRST_NAME = "";
+    //private static final String LAST_NAME = "";
     private static final String EMAIL = "";
     private static final String PASSWORD = "";
     //private static final String TAG = "";
