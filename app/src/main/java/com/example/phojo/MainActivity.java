@@ -148,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         SharedPreferences.Editor edit = sp.edit();
 
-        edit.putString(FIRST_NAME, ""); // replace "" with a variable holding the user's input
-        edit.putString(LAST_NAME, ""); // replace "" with a variable holding the user's input
+        //edit.putString(FIRST_NAME, ""); // replace "" with a variable holding the user's input
+        //edit.putString(LAST_NAME, ""); // replace "" with a variable holding the user's input
 
         edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
         edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
