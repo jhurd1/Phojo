@@ -2,10 +2,7 @@ package com.example.phojo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +64,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    public String getTestString()
+    {
+        String testString = "";
+        return testString;
+    }
+
+    public View getActivity()
+    {
+        /*Context c = null;
+        return c;*/
+        View view = null;
+        return view;
+    }
+
     //The below code is commented out because it is for testing or it is redundant. I had put the shared preferences code in the UserLocalStore.java
     /*private final String testString = "test real string";
 
@@ -86,24 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setContentView(R.layout.activity_main);
         }
 
-        public String getTestString()
-        {
-            return testString;
-        }
-
-
         public String getHelloWorldString()
         {
             return testString;
         }
 
-        public Context getActivity()
-        {
-            Context c = null;
-            return c;
-            View view = null;
-            return view;
-        }
+
     SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
     }
     private static final String FIRST_NAME = "";

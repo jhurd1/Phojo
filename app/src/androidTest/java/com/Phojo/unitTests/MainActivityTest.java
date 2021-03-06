@@ -37,7 +37,7 @@ public class MainActivityTest
     @Test
     public void readStringFromContext_LocalizedString()
     {
-        MainActivity maObject = new MainActivity(context);
+        MainActivity maObject = new MainActivity();
         String result = maObject.getTestString();
         assertThat(result).equals(FAKE_STRING);
     }

@@ -77,8 +77,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_padding="10dp"
-        android:text="User Tag"/>
+        android:text="@string/user_tag"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -88,7 +87,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Old Password"/>
+        android:text="@string/old_password"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -98,7 +97,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="Password"
+        android:text="@string/password"
         android:layout_height="wrap_content" />
 
     <EditText
@@ -110,7 +109,7 @@
 
     <Button
         android:id="@+id/eProfile"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
