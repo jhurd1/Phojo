@@ -1,15 +1,16 @@
 package com.example.phojo;
 
 public class User {
-    String firstname, middleinitial, lastname, username, passowrd;
+    String firstname, middleinitial, lastname, username, passowrd, userTag;
 
-    public User (String firstname, String middleinitial, String lastname, String username, String passowrd) {
+    public User (String firstname, String middleinitial, String lastname, String username, String passowrd, String userTag) {
         this.firstname = firstname;
         this.middleinitial = middleinitial;
         this.lastname = lastname;
         this.username = username;
         this.passowrd = passowrd;
-    }
+        this.userTag = userTag;
+     }
 
     public User () {
         this.firstname = "";
@@ -17,6 +18,7 @@ public class User {
         this.lastname = "";
         this.username = "";
         this.passowrd = "";
+        this.userTag = "";
     }
 }
 
