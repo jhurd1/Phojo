@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Login extends BaseActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     Button bLogin;
     EditText etUsername, etPassword;
@@ -37,22 +37,17 @@ public class Login extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bLogin:
-                // Fetch data from shared storage
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                LoginUserResult storedUser = UserLocalStore.loginUser(this, username, password);
-                if(storedUser.isError()){
-                    showError(v, storedUser.getMessage());
-                } else {
-                    User user = storedUser.getUser();
-                    userLocalStore.storeUserData(user);
-                    userLocalStore.setUserLoggedIn(true);
-                    showSuccess(v, storedUser.getMessage());
-                }
+                User user = new User();
+                userLocalStore.storeUserData(user);
+                userLocalStore.setUserLoggedIn(true);
                 break;
+
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this, Register.class));
                 break;
+
+
+
         }
     }
 }

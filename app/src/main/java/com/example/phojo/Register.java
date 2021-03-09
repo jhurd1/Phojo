@@ -1,6 +1,7 @@
 package com.example.phojo;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 User registeredData = new User(firstname, middleinitial, lastname, username, password, userTag);
 
                 break;
+
         }
     }
 }
