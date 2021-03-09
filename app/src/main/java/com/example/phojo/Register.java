@@ -1,13 +1,11 @@
 package com.example.phojo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Register extends AppCompatActivity implements View.OnClickListener {
+public class Register extends BaseActivity implements View.OnClickListener {
 
     Button bRegister;
     EditText etFirstName, etMiddleName, etLastName, etUsername, etPassword, uTag;
@@ -29,8 +27,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.bRegister:
                 String firstname = etFirstName.getText().toString();
                 String middleinitial = etMiddleName.getText().toString();
@@ -40,7 +38,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String userTag = uTag.getText().toString();
 
                 User registeredData = new User(firstname, middleinitial, lastname, username, password, userTag);
-
+                OperationResult result = UserLocalStore.registerUser(this, registeredData);
+                if(result.isError()){
+                    showError(view, result.getMessage());
+                }else{
+                    showSuccess(view, result.getMessage());
+                }
                 break;
         }
     }
