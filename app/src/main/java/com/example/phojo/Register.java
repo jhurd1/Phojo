@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Register extends BaseActivity implements View.OnClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Register extends AppCompatActivity implements View.OnClickListener {
 
     Button bRegister;
     EditText etFirstName, etMiddleName, etLastName, etUsername, etPassword, uTag;
@@ -38,12 +40,7 @@ public class Register extends BaseActivity implements View.OnClickListener {
                 String userTag = uTag.getText().toString();
 
                 User registeredData = new User(firstname, middleinitial, lastname, username, password, userTag);
-                OperationResult result = UserLocalStore.registerUser(this, registeredData);
-                if(result.isError()){
-                    showError(view, result.getMessage());
-                }else{
-                    showSuccess(view, result.getMessage());
-                }
+
                 break;
         }
     }
