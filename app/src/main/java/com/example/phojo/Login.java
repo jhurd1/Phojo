@@ -15,7 +15,7 @@ public class Login extends BaseActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     TextView tvRegisterLink;
 
-    UserLocalStore userLocalStore = new UserLocalStore(this);
+    UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,8 @@ public class Login extends BaseActivity implements View.OnClickListener {
 
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);
+
+        userLocalStore = new UserLocalStore(this);
     }
 
     @Override

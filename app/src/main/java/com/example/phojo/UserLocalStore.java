@@ -88,7 +88,7 @@ public class UserLocalStore {
                 return result;
             }
         }
-        return new LoginUserResult(false, "Invalid user, try again.");
+        return new LoginUserResult(true, "Invalid user, try again.");
     }
 
     public static OperationResult registerUser(Activity activity, User registeredData){
