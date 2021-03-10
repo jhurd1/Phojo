@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Where life meet lens"
+        android:text="Where life meets lens"
         android:layout_gravity="center"/>
 
     <TextView

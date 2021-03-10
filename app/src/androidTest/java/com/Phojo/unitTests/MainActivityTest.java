@@ -70,7 +70,7 @@ public class MainActivityTest
     {
         //Since we're testing a test for the id of the ViewText in MainActivity
         View view = mActivity;
-        assertNotNull(view);
+        assertNotNull(view); // null value from user in view? test fails.
     }
 
     @After

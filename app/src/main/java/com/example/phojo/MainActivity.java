@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bLogout;
     EditText etFirstName, etMiddleName, etLastName, etUsername, uTag;
     UserLocalStore userLocalStore;
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bLogout:
                 userLocalStore.clearUserData();
                 userLocalStore.setUserLoggedIn(false);
+                Log.i(TAG, "User state changed to logged out.");
                 startActivity(new Intent(this, Login.class));
+                Log.i(TAG, "Login Activity called.");
+                break;
+            default:
                 break;
         }
     }

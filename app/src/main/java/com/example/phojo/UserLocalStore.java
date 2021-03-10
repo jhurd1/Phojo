@@ -2,9 +2,11 @@ package com.example.phojo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class UserLocalStore {
     public static final String SP_NAME = "userdetails";
+    public static final String TAG = "debugCommit";
     SharedPreferences userLocalDatabase;
 
     public UserLocalStore(Context context) {
@@ -39,6 +41,7 @@ public class UserLocalStore {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.putBoolean("loggedIn", loggedIn);
         spEditor.commit();
+        Log.d(TAG, "Commit of login status called.");
     }
 
     public boolean getUserLoggedIn() {
@@ -53,6 +56,7 @@ public class UserLocalStore {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.clear();
         spEditor.commit();
+        Log.d(TAG, "User data clear commited.");
     }
 }
 

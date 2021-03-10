@@ -3,6 +3,7 @@ package com.example.phojo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     Button bRegister;
     EditText etFirstName, etMiddleName, etLastName, etUsername, etPassword, uTag;
+    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String userTag = uTag.getText().toString();
 
                 User registeredData = new User(firstname, middleinitial, lastname, username, password, userTag);
+                Log.i(TAG, "User object instantiated.");
 
                 break;
         }
