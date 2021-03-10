@@ -1,8 +1,10 @@
 package com.example.phojo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+//import com.google.gson.Gson;
 
 public class UserLocalStore {
     public static final String SP_NAME = "userdetails";
@@ -19,7 +21,7 @@ public class UserLocalStore {
         spEditor.putString("middleinitial", user.middleinitial);
         spEditor.putString("lastname", user.lastname);
         spEditor.putString("username", user.username);
-        spEditor.putString("password", user.passowrd);
+        spEditor.putString("password", user.password);
         spEditor.putString("userTag", user.userTag);
         spEditor.commit();
     }

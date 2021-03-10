@@ -1,23 +1,28 @@
 package com.example.phojo;
 
 public class User {
-    String firstname, middleinitial, lastname, username, passowrd, userTag;
+    String firstname;
+    String middleinitial;
+    String lastname;
+    String username;
+    String password;
+    String userTag;
 
-    public User (String firstname, String middleinitial, String lastname, String username, String passowrd, String userTag) {
+    public User (String firstname, String middleinitial, String lastname, String username, String password, String userTag) {
         this.firstname = firstname;
         this.middleinitial = middleinitial;
         this.lastname = lastname;
         this.username = username;
-        this.passowrd = passowrd;
+        this.password = password;
         this.userTag = userTag;
-     }
+    }
 
     public User () {
         this.firstname = "";
         this.middleinitial = "";
         this.lastname = "";
         this.username = "";
-        this.passowrd = "";
+        this.password = "";
         this.userTag = "";
     }
 }

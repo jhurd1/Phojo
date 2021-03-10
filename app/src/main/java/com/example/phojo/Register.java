@@ -1,12 +1,13 @@
 package com.example.phojo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,8 +32,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.bRegister:
                 String firstname = etFirstName.getText().toString();
                 String middleinitial = etMiddleName.getText().toString();
@@ -45,6 +46,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 Log.i(TAG, "User object instantiated.");
 
                 break;
+
         }
     }
 }
