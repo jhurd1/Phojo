@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--The Share Recent Page-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -44,8 +45,10 @@
         android:layout_marginTop="450dp"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/Georgia"
+        android:text="Logout"
         android:textFontWeight="200"
-        android:text="Logout" />
+        />
+    <!--android:fontFamily="@font/Georgia"
+    Still causing linking failed error.-->
 
 </LinearLayout>

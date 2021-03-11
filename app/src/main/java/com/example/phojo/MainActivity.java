@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+//import "UserValidatorTest.java";
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
+    UserValidatorTest uvt = new UserValidatorTest();
     Button bLogout;
     EditText etFirstName, etMiddleName, etLastName, etUsername, uTag;
     UserLocalStore userLocalStore;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void displayUserDetails() {
         User user = userLocalStore.getLoggedInUser();
-
+        UserValidatorTest.userValidatorReturnsTrue();
         etFirstName.setText(user.firstname);
         etMiddleName.setText(user.middleinitial);
         etLastName.setText(user.lastname);

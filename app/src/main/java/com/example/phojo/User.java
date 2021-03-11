@@ -1,6 +1,13 @@
 package com.example.phojo;
 
 public class User {
+    User u = new User();
+    public String fName = u.firstname;
+    public String mName = u.middleinitial;
+    public String lName = u.lastname;
+    public String userName = u.username;
+    public String pWord = u.password;
+    public String uTag = u.userTag;
     String firstname;
     String middleinitial;
     String lastname;

@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-//import com.google.gson.Gson;
 
 public class UserLocalStore {
     public static final String SP_NAME = "userdetails";
     public static final String TAG = "debugCommit";
+    public static final String TAG2 = "userObjectInstanced";
     SharedPreferences userLocalDatabase;
 
     public UserLocalStore(Context context) {
@@ -35,7 +35,7 @@ public class UserLocalStore {
         String userTag = userLocalDatabase.getString("userTag", "");
 
         User storedUser = new User(firstname, middleinitial, lastname, username, password, userTag);
-
+        Log.i(TAG2, "User object instanced from UserLocalStore.java");
         return storedUser;
     }
 
