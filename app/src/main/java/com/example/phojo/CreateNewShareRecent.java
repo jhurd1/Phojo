@@ -2,10 +2,12 @@ package com.example.phojo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 public class CreateNewShareRecent extends AppCompatActivity {
@@ -22,7 +24,18 @@ public class CreateNewShareRecent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e)
+        {
+            Log.d(TAG,"hide title bar failed");
+        }
         setContentView(R.layout.create_new_share_recent);
+        Log.i(TAG, "onCreate called for createNewShareRecent.java.");
+        //Remove the banner at page top.
+        //the following line and @android/style:theme.NoTitleBar in
+        // the manifest.xml crashed the app without notice of error
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
     /************************************
@@ -51,7 +64,7 @@ public class CreateNewShareRecent extends AppCompatActivity {
      * handles logging out
      ************************************/
     //@Override
-    public void onClick(View v) {
+   /* public void onClick(View v) {
         switch (v.getId()) {
             case R.id.logoutButton:
                 userLocalStore.clearUserData();
@@ -63,6 +76,6 @@ public class CreateNewShareRecent extends AppCompatActivity {
             default:
                 break;
         }
-    }
+    }*/
 
 }

@@ -11,14 +11,25 @@ import android.widget.TextView;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    /*****************************
+     * DATA MEMBERS
+    ****************************/
     Button bLogin;
     EditText etUsername, etPassword;
     TextView tvRegisterLink;
-
     UserLocalStore userLocalStore;
 
+    /*****************************
+     * onCreate
+     * initialize the activity
+     * load data from 'savedInstanceState'
+     * @param savedInstanceState
+     * Bundle stores activity data.
+     ****************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        // super accesses members from the parent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -26,13 +37,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
         tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
-
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);
-
         userLocalStore = new UserLocalStore(this);
     }
 
+    /*****************************
+     * onClick event
+     * triggered by user click
+     * handle each button (case)
+     * @param v
+     ****************************/
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -46,9 +61,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this, Register.class));
                 break;
-
-
-
         }
     }
 }
