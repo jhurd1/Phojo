@@ -23,23 +23,23 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
     private static final String TAG = "landingPageLogout";
 
     /************************************
-     * onCreate activity_landing_page
+     * onCreate
+     * @param savedInstanceState
+     * Removes title bar
+     * creates necessaries
      ************************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        // hide the title bar
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e)
         {
-            Log.d(TAG,"hide title bar failed");
+            Log.d(TAG,"hide title bar failed for createNewShareRecent.java");
         }
         setContentView(R.layout.create_new_share_recent);
-        Log.i(TAG, "onCreate called for createNewShareRecent.java.");
-        //Remove the banner at page top.
-        //the following line and @android/style:theme.NoTitleBar in
-        // the manifest.xml crashed the app without notice of error
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
         logoutButton = (Button)findViewById(R.id.logoutButton);
@@ -77,27 +77,3 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
                 break;
         }
     }*/
-
-}
-/************************************
- * onClick for LandingPage's
- * LogOut option
- * This code isn't needed as it is redundant.
-
- //@Override
- public void onClick(Button b)
- {
- switch (b.getId())
- {
- case R.id.logoutButton:
- userLocalStore.clearUserData();
- userLocalStore.setUserLoggedIn(false);
- Log.i(TAG, "LandingPage user state changed to logged out.");
- startActivity(new Intent(this, Login.class));
- Log.i(TAG, "Login Activity called from LandingPage.");
- break;
- default:
- break;
- }
- }
- ************************************/

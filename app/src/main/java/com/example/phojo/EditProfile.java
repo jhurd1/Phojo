@@ -3,17 +3,30 @@ package com.example.phojo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class EditProfile extends AppCompatActivity implements View.OnClickListener {
+
+    /**********************************
+     * DATA MEMBERS
+     ********************************/
+    public static final String TAG = "checkTitleBar";
     Button eProfile;
     EditText edFirstName, edMiddleName, edLastName, edUsername, edPassword, edTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // hide the title bar
+        try {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e)
+        {
+            Log.d(TAG,"hide title bar failed for createNew.java");
+        }
         setContentView(R.layout.activity_register);
 
         edFirstName = (EditText) findViewById(R.id.edFirstName);

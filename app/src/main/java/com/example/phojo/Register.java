@@ -11,13 +11,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
+    /**********************************
+     * DATA MEMBERS
+     ********************************/
+    public static final String TAG = "checkTitleBar";
     Button bRegister;
     EditText etFirstName, etMiddleName, etLastName, etUsername, etPassword, uTag;
-    private static final String TAG = "RegisterActivity";
+    //private static final String TAG2 = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // hide the title bar
+        try {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e)
+        {
+            Log.d(TAG,"hide title bar failed for createNew.java");
+        }
         setContentView(R.layout.activity_register);
 
         etFirstName = (EditText) findViewById(R.id.etFirstName) ;
