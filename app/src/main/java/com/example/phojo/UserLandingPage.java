@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-public class MainPage extends AppCompatActivity {
+public class UserLandingPage extends AppCompatActivity {
 
     /************************************
      * PRIVATE MEMBERS
@@ -22,7 +21,7 @@ public class MainPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
+        setContentView(R.layout.activity_user_landing_page);
     }
 
     /************************************

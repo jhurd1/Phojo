@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 User user = new User();
                 userLocalStore.storeUserData(user);
                 userLocalStore.setUserLoggedIn(true);
+                startActivity(new Intent(this, UserLandingPage.class));
                 break;
 
             case R.id.tvRegisterLink:

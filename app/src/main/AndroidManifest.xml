@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Phojo">
         <activity android:name=".CreateNew"></activity>
-        <activity android:name=".MainPage" />
+        <activity android:name=".UserLandingPage" />
         <activity android:name=".EditProfile" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
