@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 //import "UserValidatorTest.java";
 
+/*
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     UserValidatorTest uvt = new UserValidatorTest();
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etUsername = (EditText) findViewById(R.id.etUsername);
-        bLogout = (Button) findViewById(R.id.bLogout);
+        //bLogout = (Button) findViewById(R.id.bLogout);
         uTag = (EditText) findViewById(R.id.uTag);
 
         bLogout.setOnClickListener(this);
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return userLocalStore.getUserLoggedIn();
     }
 
-    @Override
+   */
+/* @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bLogout:
@@ -71,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
-    }
+    }*//*
+
 
     public String getTestString()
     {
@@ -81,9 +84,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public View getActivity()
     {
-        /*Context c = null;
-        return c;*/
+        */
+/*Context c = null;
+        return c;*//*
+
         View view = null;
         return view;
     }
-}
+*/

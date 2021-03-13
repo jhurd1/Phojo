@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
-public class UserLandingPage extends AppCompatActivity {
+public class CreateNewShareRecent extends AppCompatActivity {
 
     /************************************
      * PRIVATE MEMBERS
@@ -21,7 +22,7 @@ public class UserLandingPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_landing_page);
+        setContentView(R.layout.create_new_share_recent);
     }
 
     /************************************
@@ -29,9 +30,9 @@ public class UserLandingPage extends AppCompatActivity {
      * LogOut option
      ************************************/
     //@Override
-    public void onClick(View v)
+    public void onClick(Button b)
     {
-        switch (v.getId())
+        switch (b.getId())
         {
             case R.id.logoutButton:
                 userLocalStore.clearUserData();
@@ -39,6 +40,25 @@ public class UserLandingPage extends AppCompatActivity {
                 Log.i(TAG, "LandingPage user state changed to logged out.");
                 startActivity(new Intent(this, Login.class));
                 Log.i(TAG, "Login Activity called from LandingPage.");
+                break;
+            default:
+                break;
+        }
+    }
+
+    /************************************
+     * LOGOUT
+     * handles logging out
+     ************************************/
+    //@Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.logoutButton:
+                userLocalStore.clearUserData();
+                userLocalStore.setUserLoggedIn(false);
+                Log.i(TAG, "User state changed to logged out.");
+                startActivity(new Intent(this, Login.class));
+                Log.i(TAG, "Login Activity called.");
                 break;
             default:
                 break;
