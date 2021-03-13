@@ -59,10 +59,10 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
      ************************************/
     //@Override
    /* public void onClick(View v) {
-=======
+
     @Override
     public void onClick(View v) {
->>>>>>> bfac310dafafd9bcf9fdd32bebfee07fe1c4cb31
+
         switch (v.getId()) {
             case R.id.logoutButton:
                 userLocalStore.clearUserData();
