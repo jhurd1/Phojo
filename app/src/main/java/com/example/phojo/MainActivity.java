@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void displayUserDetails() {
         User user = userLocalStore.getLoggedInUser();
-        UserValidatorTest.userValidatorReturnsTrue();
+        //UserValidatorTest.userValidatorReturnsTrue();
         etFirstName.setText(user.firstname);
         etMiddleName.setText(user.middleinitial);
         etLastName.setText(user.lastname);
@@ -86,65 +86,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View view = null;
         return view;
     }
-
-    //The below code is commented out because it is for testing or it is redundant. I had put the shared preferences code in the UserLocalStore.java
-    /*private final String testString = "test real string";
-
-        public MainActivity(Context context)
-        {
-        }
-
-        /*public MainActivity()
-        {
-
-        }
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState)
-        {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-        }
-
-        public String getHelloWorldString()
-        {
-            return testString;
-        }
-
-
-    SharedPreferences sharedPreferences = getSharedPreferences ("userData", Context.MODE_PRIVATE);
-    }
-    private static final String FIRST_NAME = "";
-    private static final String LAST_NAME = "";
-    private static final String EMAIL = "";
-    private static final String PASSWORD = "";
-    private static final String TAG = "";
-    Context context = getActivity(); // context lets new objects in on the program's state
-    Resources res = getResources();
-    String[] userData = res.getStringArray(R.array.preference_file_key);
-    SharedPreferences sp = context.getSharedPreferences(
-            String.valueOf(res.getStringArray(R.array.preference_file_key)), Context.MODE_PRIVATE);
-
-    private Context getActivity()
-    {
-
-    }
-
-    protected void onClick(Context c) // changed to context from view
-    {
-        SharedPreferences.Editor edit = sp.edit();
-
-        //edit.putString(FIRSTNAME, ""); // replace "" with a variable holding the user's input
-        //edit.putString(LASTNAME, ""); // replace "" with a variable holding the user's input
-        edit.putString(EMAIL, ""); // replace "" with a variable holding the user's input
-        edit.putString(PASSWORD, ""); // replace "" with a variable holding the user's input
-        //edit.putString(TAG, ""); // replace "" with a variable holding the user's input
-        edit.apply();
-    }
-
-    SharedPreferences loadSharedPreferences = getSharedPreferences("preference_file_key",
-            Context.MODE_PRIVATE);
-    EMAIL = loadSharedPreferences.getString("username", "");
-    PASSWORD = loadSharedPreferences.getString("password", "");
-*/
 }
