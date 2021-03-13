@@ -29,22 +29,21 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
      * creates necessaries
      ************************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // hide the title bar
         try {
             this.getSupportActionBar().hide();
-        } catch (NullPointerException e)
-        {
-            Log.d(TAG,"hide title bar failed for createNewShareRecent.java");
+        } catch (NullPointerException e) {
+            Log.d(TAG, "hide title bar failed for createNewShareRecent.java");
         }
         setContentView(R.layout.create_new_share_recent);
-    }
 
-        logoutButton = (Button)findViewById(R.id.logoutButton);
-        cButton = (Button)findViewById(R.id.cButton);
-        tvShare = (TextView)findViewById(R.id.tvShare);
+        logoutButton =(Button)findViewById(R.id.logoutButton);
+
+        cButton =(Button)findViewById(R.id.cButton);
+
+        tvShare =(TextView)findViewById(R.id.tvShare);
 
         logoutButton.setOnClickListener(this);
         cButton.setOnClickListener(this);
@@ -57,8 +56,6 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
      * LOGOUT
      * handles logging out
      ************************************/
-    //@Override
-   /* public void onClick(View v) {
 
     @Override
     public void onClick(View v) {
@@ -76,4 +73,5 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
             default:
                 break;
         }
-    }*/
+    }
+}
