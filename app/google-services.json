@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "523993651662",
+    "project_id": "phojo-4c5ef",
+    "storage_bucket": "phojo-4c5ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523993651662:android:cdd999eae74ccbaa4cf39f",
+        "android_client_info": {
+          "package_name": "com.example.phojo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523993651662-2dmescn82ncane5mempcjtbnk9vjq2ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE7G-E0MQu0nc9iyv8iG-4BluXR4PzqxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523993651662-2dmescn82ncane5mempcjtbnk9vjq2ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
