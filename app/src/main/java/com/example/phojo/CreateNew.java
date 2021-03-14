@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class CreateNew extends AppCompatActivity implements View.OnClickListener {
+public class CreateNew extends AppCompatActivity implements View.OnClickListener
+{
 
     /**********************************
      * DATA MEMBERS
@@ -20,7 +21,8 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      * @param savedInstanceState
      ********************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         // hide the title bar
         try {

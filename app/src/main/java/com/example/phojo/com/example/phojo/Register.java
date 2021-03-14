@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.awt.Button;
+
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
     /**********************************
@@ -57,7 +59,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 Log.i(TAG, "User object instantiated from Register.java.");
 
                 break;
-
         }
     }
 }
