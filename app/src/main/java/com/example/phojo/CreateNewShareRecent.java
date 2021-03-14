@@ -40,6 +40,14 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
         logoutButton = (Button) findViewById(R.id.logoutButton);
         cButton = (Button) findViewById(R.id.cButton);
         tvShare = (TextView) findViewById(R.id.tvShare);
+
+        logoutButton =(Button)findViewById(R.id.logoutButton);
+
+        cButton =(Button)findViewById(R.id.cButton);
+
+        tvShare =(TextView)findViewById(R.id.tvShare);
+
+
         logoutButton.setOnClickListener(this);
         cButton.setOnClickListener(this);
         tvShare.setOnClickListener(this);
@@ -50,6 +58,7 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
      * LOGOUT
      * handles logging out
      ************************************/
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
