@@ -4,6 +4,8 @@
     <string name="user_tag">User Tag</string>
     <string name="old_password">Old Password</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="sign_in"><u>Sign In</u></string>
+    <string name="create_account"><u>Create Account</u></string>
     <string-array name="preference_file_key">
         <item>FIRSTNAME</item>
         <item>LASTNAME</item>
