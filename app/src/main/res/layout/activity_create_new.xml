@@ -7,27 +7,16 @@
     tools:context=".CreateNew">
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:text="(Phojo will prompt you for details per photo)"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/addDescription"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="84dp"
-        android:text="Tell your Phojo story."
+        android:layout_marginStart="24dp"
+        android:text="Add text to your Phojo's story"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintBottom_toBottomOf="@+id/addDescription"
+        app:layout_constraintStart_toEndOf="@+id/addDescription"
+        app:layout_constraintTop_toTopOf="@+id/addDescription" />
 
     <TextView
         android:id="@+id/textView5"
@@ -35,11 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="84dp"
-        android:text="Add up to five images per Phojo."
+        android:text="Add 1-5 images to each Phojo"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addImages"
         app:layout_constraintStart_toEndOf="@+id/addImages"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/addImages" />
 
     <TextView
         android:id="@+id/textView4"
@@ -47,11 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
-        android:text="Select your next Phojo's catergory."
+        android:text="Select this Phojo's category"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/selectCategory"
         app:layout_constraintStart_toEndOf="@+id/selectCategory"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/selectCategory" />
 
     <TextView
         android:id="@+id/textView3"
@@ -92,35 +81,32 @@
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginTop="72dp"
         android:text="+"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/addImages"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginTop="72dp"
         android:text="+"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/selectCategory" />
 
     <Button
         android:id="@+id/addDescription"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginTop="72dp"
         android:text="+"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/addImages" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
