@@ -23,6 +23,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // hide the title bar
         try {
             this.getSupportActionBar().hide();
@@ -30,6 +31,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         {
             Log.d(TAG,"hide title bar failed for createNew.java");
         }
+
         setContentView(R.layout.activity_register);
 
         etFirstName = (EditText) findViewById(R.id.etFirstName) ;
