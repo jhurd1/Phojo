@@ -16,7 +16,7 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
     /************************************
      * DATA MEMBERS
      ************************************/
-    Button logoutButton, cButton;
+    Button logoutButton, cButton, bEditProfile;
     TextView tvShare;
     UserLocalStore userLocalStore;
     private static final String TAG = "landingPageLogout";
@@ -40,14 +40,9 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
         logoutButton = (Button) findViewById(R.id.logoutButton);
         cButton = (Button) findViewById(R.id.cButton);
         tvShare = (TextView) findViewById(R.id.tvShare);
+        bEditProfile = (Button)findViewById(R.id.bEditProfile);
 
-        logoutButton =(Button)findViewById(R.id.logoutButton);
-
-        cButton =(Button)findViewById(R.id.cButton);
-
-        tvShare =(TextView)findViewById(R.id.tvShare);
-
-
+        bEditProfile.setOnClickListener(this);
         logoutButton.setOnClickListener(this);
         cButton.setOnClickListener(this);
         tvShare.setOnClickListener(this);
@@ -71,6 +66,8 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.cButton:
                 startActivity(new Intent(this, CreateNew.class));
+            case R.id.bEditProfile:
+                startActivity(new Intent (this, EditProfile.class));
             default:
                 break;
         }

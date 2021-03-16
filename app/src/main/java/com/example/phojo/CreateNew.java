@@ -14,7 +14,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      * DATA MEMBERS
      ********************************/
     public static final String TAG = "checkTitleBar";
-    Button addDescription, addImages, selectCategory;
+    Button addDescription, addImages, selectCategory, publish;
 
     /**********************************
      * onCreate
@@ -36,6 +36,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         addDescription = (Button)findViewById(R.id.addDescription);
         addImages = (Button)findViewById(R.id.addImages);
         selectCategory = (Button)findViewById(R.id.selectCategory);
+        publish = (Button)findViewById(R.id.publish);
     }
 
     @Override

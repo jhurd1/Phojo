@@ -2,6 +2,7 @@ package com.example.phojo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +53,10 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 String userTag = edTag.getText().toString();
 
                 User editData = new User(firstname, middleinitial, lastname, username, password, userTag);
+
+                Intent openCreateNewShareRecentActivity = new Intent(this, CreateNewShareRecent.class);
+                openCreateNewShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openCreateNewShareRecentActivity, 0);
 
                 break;
         }
