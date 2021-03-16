@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.Phojo">
         <activity android:name=".CreateNew"></activity>
         <activity android:name=".CreateNewShareRecent" />
@@ -22,6 +23,8 @@
         </activity>
         <!--Commented mainActivity for error: couldn't be found-->
         <!--<activity android:name=".MainActivity"/>-->
+        <!--android:name=".Phojo"-->
+        <!--android:name="androidx.multidex.MultiDexApplication"-->
     </application>
 
 </manifest>

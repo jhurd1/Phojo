@@ -1,7 +1,9 @@
 package com.example.phojo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.multidex.MultiDex;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,10 +20,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     TextView tvRegisterLink;
     UserLocalStore userLocalStore;
+    /*****************************
+     * MULTI_DEX_REQUIRED
+     ****************************/
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     /*****************************
      * onCreate
-     * initialize the activity
+     * initialize the login activity
      * load data from 'savedInstanceState'
      * @param savedInstanceState
      * Bundle stores activity data.
@@ -43,7 +53,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     /*****************************
-     * onClick event
+     * onClick login event
      * triggered by user click
      * handle each button (case)
      * @param v
