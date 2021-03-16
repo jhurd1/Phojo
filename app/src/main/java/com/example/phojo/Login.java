@@ -1,6 +1,7 @@
 package com.example.phojo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.multidex.MultiDex;
 
 import android.content.Context;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     /*****************************
@@ -20,6 +23,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     TextView tvRegisterLink;
     UserLocalStore userLocalStore;
+    TextView stylePhojoHeader;
     /*****************************
      * MULTI_DEX_REQUIRED
      ****************************/
@@ -46,6 +50,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // hides the title bar
         getSupportActionBar().hide();
 
+        // Control the font style for the header
+        /*stylePhojoHeader = (TextView) findViewById(R.id.phojoHeader);
+        Context context = this;
+        stylePhojoHeader.setTypeface(ResourcesCompat.getFont(context, R.font.balloonpopsax0x));*/
+        
+        // push user input into the user object
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
