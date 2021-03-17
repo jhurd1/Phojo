@@ -45,7 +45,7 @@ public class ShareRecent extends AppCompatActivity implements View.OnClickListen
         } catch (NullPointerException e) {
             Log.d(TAG, "hide title bar failed for createNewShareRecent.java");
         }
-        setContentView(R.layout.share_recent);
+        setContentView(R.layout.activity_share_recent);
         logoutButton = (Button) findViewById(R.id.logoutButton);
         cButton = (Button) findViewById(R.id.cButton);
         tvShare = (TextView) findViewById(R.id.tvShare);

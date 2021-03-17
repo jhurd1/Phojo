@@ -43,7 +43,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         {
             Log.d(TAG,"hide title bar failed for createNew.java");
         }
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_edit_profile);
 
         edFirstName = (EditText) findViewById(R.id.edFirstName);
         edMiddleName = (EditText) findViewById(R.id.edMiddleName);
