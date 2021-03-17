@@ -1,13 +1,13 @@
 package com.example.phojo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * CREATENEWSHARERECENT
@@ -67,6 +67,12 @@ public class ShareRecent extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.bEditProfile:
+                startActivity(new Intent (this, EditProfile.class));
+                break;
+            case R.id.cButton:
+                startActivity(new Intent(this, CreateNew.class));
+                break;
             case R.id.logoutButton:
                 userLocalStore.clearUserData();
                 userLocalStore.setUserLoggedIn(false);
@@ -74,10 +80,6 @@ public class ShareRecent extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(this, Login.class));
                 Log.i(TAG, "Login Activity called.");
                 break;
-            case R.id.cButton:
-                startActivity(new Intent(this, CreateNew.class));
-            case R.id.bEditProfile:
-                startActivity(new Intent (this, EditProfile.class));
             default:
                 break;
         }

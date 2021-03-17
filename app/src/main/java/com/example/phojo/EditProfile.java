@@ -1,13 +1,13 @@
 package com.example.phojo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * EDITPROFILE
@@ -75,9 +75,9 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                 User editData = new User(firstname, middleinitial, lastname, username, password, userTag);
 
-                Intent openCreateNewShareRecentActivity = new Intent(this, ShareRecent.class);
-                openCreateNewShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openCreateNewShareRecentActivity, 0);
+                Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
+                openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openShareRecentActivity, 0);
 
                 break;
         }
