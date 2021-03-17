@@ -21,8 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author danallewellyn
  * @author jamiehurd
  */
-public class CreateNew extends AppCompatActivity implements View.OnClickListener
-{
+public class CreateNew extends AppCompatActivity implements View.OnClickListener {
 
     /**********************************
      * DATA MEMBERS
@@ -42,23 +41,23 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      * @param savedInstanceState
      ********************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new);
 
         // hide the title bar
         try {
             this.getSupportActionBar().hide();
-        } catch (NullPointerException e)
-        {
-            Log.d(TAG,"hide title bar failed for createNew.java");
+        } catch (NullPointerException e) {
+            Log.d(TAG, "hide title bar failed for createNew.java");
         }
 
-        addDescription = (Button)findViewById(R.id.addDescription);
-        addImages = (Button)findViewById(R.id.addImages);
-        selectCategory = (Button)findViewById(R.id.selectCategory);
-        publish = (Button)findViewById(R.id.publish);
+        addDescription = (Button) findViewById(R.id.addDescription);
+        addImages = (Button) findViewById(R.id.addImages);
+        selectCategory = (Button) findViewById(R.id.selectCategory);
+        publish = (Button) findViewById(R.id.publish);
+
+        publish.setOnClickListener(this);
     }
 
     /********************************
@@ -68,7 +67,13 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      *******************************/
     @Override
     public void onClick(View v) {
-        
+        switch (v.getId()) {
+            case R.id.publish:
+                Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
+                openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(openShareRecentActivity, 0);
+                break;
+        }
     }
 
     // we can move openGallery() into onClick with a switch statement that determines if addImages was clicked
