@@ -1,13 +1,20 @@
 package com.example.phojo;
 
+/**
+ * USER CLASS
+ * A class for containing and passing
+ * user information.
+ *
+ * @author edgarcobian
+ * @author chrisfowler
+ * @author danallewellyn
+ * @author jamiehurd
+ */
 public class User {
-    //User u = new User();
-    /*public String fName = u.firstname;
-    public String mName = u.middleinitial;
-    public String lName = u.lastname;
-    public String userName = u.username;
-    public String pWord = u.password;
-    public String uTag = u.userTag;*/
+
+    /***********************************
+     * DATA MEMBERS
+     **********************************/
     String firstname;
     String middleinitial;
     String lastname;
@@ -15,6 +22,19 @@ public class User {
     String password;
     String userTag;
 
+    /*********************************
+     * CONSTRUCTORS
+     ********************************/
+
+    /*********************************
+     * User Constructor
+     * @param firstname
+     * @param middleinitial
+     * @param lastname
+     * @param username
+     * @param password
+     * @param userTag
+     ********************************/
     public User (String firstname, String middleinitial, String lastname, String username, String password, String userTag) {
         this.firstname = firstname;
         this.middleinitial = middleinitial;
@@ -24,6 +44,9 @@ public class User {
         this.userTag = userTag;
     }
 
+    /*********************************
+     * User Non-default Constructor
+     ********************************/
     public User () {
         this.firstname = "";
         this.middleinitial = "";

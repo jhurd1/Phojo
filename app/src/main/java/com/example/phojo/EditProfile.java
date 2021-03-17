@@ -9,6 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * EDITPROFILE
+ * A class for controlling
+ * the editing of a user's profile.
+ *
+ * @author edgarcobian
+ * @author chrisfowler
+ * @author danallewellyn
+ * @author jamiehurd
+ */
 public class EditProfile extends AppCompatActivity implements View.OnClickListener {
 
     /**********************************
@@ -18,6 +28,11 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     Button eProfile;
     EditText edFirstName, edMiddleName, edLastName, edUsername, edPassword, edTag;
 
+    /********************************
+     * editProfile's onCreate
+     * Synthesizes objects necessary for editProfile
+     * @param savedInstanceState
+     *******************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +56,12 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         eProfile.setOnClickListener(this);
     }
 
+    /*********************************
+     * onClick for editProfile
+     * passes in data from users to edit
+     * their profile
+     * @param v
+     ********************************/
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

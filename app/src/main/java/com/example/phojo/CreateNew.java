@@ -6,7 +6,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ * CREATENEW
+ * A class employed for the
+ * synthesizing of new Phojo
+ * listing.
+ *
+ * @author edgarcobian
+ * @author chrisfowler
+ * @author danallewellyn
+ * @author jamiehurd
+ */
 public class CreateNew extends AppCompatActivity implements View.OnClickListener
 {
 
@@ -17,7 +27,9 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
     Button addDescription, addImages, selectCategory, publish;
 
     /**********************************
-     * onCreate
+     * onCreate for CreateNew
+     * Creates the objects necessary
+     * for a new Phojo creation
      * @param savedInstanceState
      ********************************/
     @Override
@@ -39,6 +51,11 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         publish = (Button)findViewById(R.id.publish);
     }
 
+    /********************************
+     * onClick for CreateNew's
+     * Phojo data upload options
+     * @param v
+     *******************************/
     @Override
     public void onClick(View v) {
 

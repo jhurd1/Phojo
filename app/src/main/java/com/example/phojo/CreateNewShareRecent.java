@@ -11,6 +11,17 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * CREATENEWSHARERECENT
+ * A class to handle the
+ * sharing of recent Phojo
+ * listings by thumbnail.
+ *
+ * @author edgarcobian
+ * @author chrisfowler
+ * @author danallewellyn
+ * @author jamiehurd
+ */
 public class CreateNewShareRecent extends AppCompatActivity implements View.OnClickListener {
 
     /************************************
@@ -23,9 +34,9 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
 
     /************************************
      * onCreate
-     * @param savedInstanceState
      * Removes title bar
      * creates necessaries
+     * @param savedInstanceState
      ************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +62,10 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
 
     /************************************
      * LOGOUT
-     * handles logging out
+     * handles logging out, createNew,
+     * and editProfile.
+     * @param v
      ************************************/
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
