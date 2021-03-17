@@ -15,6 +15,8 @@ import org.w3c.dom.Text;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.multidex.MultiDex;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 
 /**
  * LOGIN
@@ -67,9 +69,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         getSupportActionBar().hide();
 
         // Control the font style for the header
-        /*stylePhojoHeader = (TextView) findViewById(R.id.phojoHeader);
+        stylePhojoHeader = (TextView) findViewById(R.id.textView12);
         Context context = this;
-        stylePhojoHeader.setTypeface(ResourcesCompat.getFont(context, R.font.balloonpopsax0x));*/
+        stylePhojoHeader.setTypeface(ResourcesCompat.getFont(context, R.font.balloonpopsax0x));
         
         // push user input into the user object
         etUsername = (EditText) findViewById(R.id.etUsername);
@@ -94,7 +96,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 User user = new User();
                 userLocalStore.storeUserData(user);
                 userLocalStore.setUserLoggedIn(true);
-                startActivity(new Intent(this, CreateNewShareRecent.class));
+                startActivity(new Intent(this, ShareRecent.class));
                 break;
 
             case R.id.tvRegisterLink:

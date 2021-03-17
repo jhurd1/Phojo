@@ -11,7 +11,7 @@
 
         android:theme="@style/Theme.Phojo">
         <activity android:name=".CreateNew"></activity>
-        <activity android:name=".CreateNewShareRecent" />
+        <activity android:name=".ShareRecent" />
         <activity android:name=".EditProfile" />
         <activity android:name=".Register" />
         <activity android:name=".Login" >

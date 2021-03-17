@@ -75,7 +75,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                 User editData = new User(firstname, middleinitial, lastname, username, password, userTag);
 
-                Intent openCreateNewShareRecentActivity = new Intent(this, CreateNewShareRecent.class);
+                Intent openCreateNewShareRecentActivity = new Intent(this, ShareRecent.class);
                 openCreateNewShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(openCreateNewShareRecentActivity, 0);
 

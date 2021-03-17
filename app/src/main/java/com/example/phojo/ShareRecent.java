@@ -1,12 +1,11 @@
 package com.example.phojo;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import android.widget.TextView;
  * @author danallewellyn
  * @author jamiehurd
  */
-public class CreateNewShareRecent extends AppCompatActivity implements View.OnClickListener {
+public class ShareRecent extends AppCompatActivity implements View.OnClickListener {
 
     /************************************
      * DATA MEMBERS
@@ -46,7 +45,7 @@ public class CreateNewShareRecent extends AppCompatActivity implements View.OnCl
         } catch (NullPointerException e) {
             Log.d(TAG, "hide title bar failed for createNewShareRecent.java");
         }
-        setContentView(R.layout.create_new_share_recent);
+        setContentView(R.layout.share_recent);
         logoutButton = (Button) findViewById(R.id.logoutButton);
         cButton = (Button) findViewById(R.id.cButton);
         tvShare = (TextView) findViewById(R.id.tvShare);
