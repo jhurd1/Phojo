@@ -58,6 +58,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         publish = (Button) findViewById(R.id.publish);
 
         publish.setOnClickListener(this);
+        addImages.setOnClickListener(this);
     }
 
     /********************************
@@ -73,7 +74,14 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
                 openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(openShareRecentActivity, 0);
                 break;
-        }
+            case R.id.addImages:
+                break;
+            case R.id.selectCategory:
+                break;
+            case R.id.addDescription:
+                break;
+            }
+
     }
 
     // we can move openGallery() into onClick with a switch statement that determines if addImages was clicked
