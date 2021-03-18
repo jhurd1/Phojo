@@ -96,29 +96,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/familyVacation"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="+"
-        android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvShare" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="287dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="Family Vacation Phojos"
-        android:textSize="28dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
-        app:layout_constraintStart_toEndOf="@+id/familyVacation"
-        app:layout_constraintTop_toBottomOf="@+id/tvShare" />
 
     <Button
         android:id="@+id/logoutButton"
