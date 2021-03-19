@@ -20,7 +20,6 @@ public class UserValidatorTest
      * DATA MEMBERS
      ********************************/
     public static final String TAG = "userValidator";
-    public boolean testFailed = false;
 
     /**********************************
      * userValidatorReturnsTrue
@@ -29,7 +28,7 @@ public class UserValidatorTest
      * contain data.
      **********************************/
     @Test
-    public static boolean userValidatorReturnsTrue(boolean testFailed)
+    public static void userValidatorReturnsTrue()
     {
         User user = new User();
         //assertThat(UserValidatorTest.this).hasData();
@@ -41,9 +40,6 @@ public class UserValidatorTest
                 user.getUserTag() == null)
         {
             Log.i(TAG, "userValidator in UserValidatorTest object failed.");
-            testFailed = true;
         }
-
-        return testFailed;
     }
 }
