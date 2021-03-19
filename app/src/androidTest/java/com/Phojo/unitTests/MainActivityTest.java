@@ -1,44 +1,55 @@
+/*
 package com.Phojo.unitTests;
 
 import android.content.Context;
 import android.view.View;
 import androidx.test.core.app.ApplicationProvider;
-import com.example.phojo.MainActivity;
+//import com.example.phojo.MainActivity;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
+*/
 /***********************************
  * MAINACTIVITYTEST Class
- **********************************/
+ **********************************//*
+
 public class MainActivityTest
 {
-    /***********************************
+    */
+/***********************************
      * PRIVATE MEMBERS
-     **********************************/
+     **********************************//*
+
     private View mActivity = null;
     private static final String FAKE_STRING = "test string";
     public boolean match = false;
     private Context context = ApplicationProvider.getApplicationContext();
 
-    /***********************************
+    */
+/***********************************
      * Simple math test
-     **********************************/
+     **********************************//*
+
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
 
-    /***********************************
+    */
+/***********************************
      * Test reading a string from
      * context
-     **********************************/
-    @Test
+     **********************************//*
+
+    */
+/*@Test
     public void readStringFromContext_LocalizedString()
     {
         MainActivity maObject = new MainActivity();
         String result = maObject.getTestString();
         assertThat(result).equals(FAKE_STRING);
-    }
+    }*//*
+
 
     private Object assertThat(String result) {
         if(result == FAKE_STRING)
@@ -48,20 +59,24 @@ public class MainActivityTest
         return match;
     }
 
-    /***********************************
+    */
+/***********************************
      * Test successful launch of main
      * activity.
      * Adapted from:
      * https://www.youtube.com/watch?v=
      * ..._TR6QcRozAg&ab_channel=LearnShareAnythingAnyone
-     **********************************/
+     **********************************//*
 
-    public void setUp() throws Exception
+
+    */
+/*public void setUp() throws Exception
     {
         // to set up the test, get the activity
         MainActivity mActivityTestRule = new MainActivity();
         mActivity = mActivityTestRule.getActivity();
-    }
+    }*//*
+
 
     @Test
     public void testLaunch()
@@ -76,4 +91,4 @@ public class MainActivityTest
         // to tear down, assign mActivity to null
         mActivity = null;
     }
-}
+}*/

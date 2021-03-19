@@ -27,19 +27,19 @@ public class UserValidatorTest
      * user object's variables
      * contain data.
      **********************************/
-    /*@Test
+    @Test
     public static void userValidatorReturnsTrue()
     {
         User user = new User();
         //assertThat(UserValidatorTest.this).hasData();
-        if(user.fName == null ||
-                user.lName == null ||
-                user.mName == null ||
-                user.pWord == null ||
-                user.userName == null ||
-                user.uTag == null)
+        if(user.getEmail() == null ||
+                user.getFirstname() == null ||
+                user.getMiddleinitial() == null ||
+                user.getLastname() == null ||
+                user.getPassword() == null ||
+                user.getUserTag() == null)
         {
             Log.i(TAG, "userValidator in UserValidatorTest object failed.");
         }
-    }*/
+    }
 }

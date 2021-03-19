@@ -15,13 +15,38 @@ public class User {
     /***********************************
      * DATA MEMBERS
      **********************************/
-    String firstname;
-    String middleinitial;
-    String lastname;
-    String username;
-    String password;
-    String userTag;
+    private String firstname;
+    private String middleinitial;
+    private String lastname;
+    private String email;
+    private String password;
+    private String userTag;
 
+    /**********************************
+     * ACCESSORS
+     *********************************/
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getMiddleinitial() {
+        return middleinitial;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUserTag() {
+        return userTag;
+    }
     /*********************************
      * CONSTRUCTORS
      ********************************/
@@ -31,15 +56,15 @@ public class User {
      * @param firstname
      * @param middleinitial
      * @param lastname
-     * @param username
+     * @param email
      * @param password
      * @param userTag
      ********************************/
-    public User (String firstname, String middleinitial, String lastname, String username, String password, String userTag) {
+    public User (String firstname, String middleinitial, String lastname, String email, String password, String userTag) {
         this.firstname = firstname;
         this.middleinitial = middleinitial;
         this.lastname = lastname;
-        this.username = username;
+        this.email = email;
         this.password = password;
         this.userTag = userTag;
     }
@@ -51,7 +76,7 @@ public class User {
         this.firstname = "";
         this.middleinitial = "";
         this.lastname = "";
-        this.username = "";
+        this.email = "";
         this.password = "";
         this.userTag = "";
     }

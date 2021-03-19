@@ -81,6 +81,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     //https://developer.android.com/studio/build/multidex
     implementation "androidx.multidex:multidex:2.0.1"
+    androidTestImplementation 'junit:junit:4.12'
 }
 
 configurations {

@@ -82,7 +82,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                 User registeredData = new User(firstname, middleinitial, lastname, username, password, userTag);
                 Log.i(TAG, "User object instantiated from Register.java.");
-
+             
                 startActivity(new Intent(this, Login.class));
 
                 break;
