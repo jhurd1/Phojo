@@ -71,7 +71,7 @@ public class ShareRecent extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent (this, EditProfile.class));
                 break;
             case R.id.cButton:
-                startActivity(new Intent(this, CreateNew.class));
+                startActivity(new Intent(this, CreateNewTwo.class));
                 break;
             case R.id.logoutButton:
                 userLocalStore.clearUserData();

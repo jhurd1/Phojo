@@ -80,7 +80,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.addDescription:
                 break;
-            }
+        }
 
     }
 
