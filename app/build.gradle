@@ -79,14 +79,14 @@ dependencies {
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
     // https://firebase.google.com/docs/android/learn-more#bom
     implementation platform('com.google.firebase:firebase-bom:26.7.0') //optimizes firebase versions
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-auth' // authentication stuff
-    implementation 'com.google.firebase:firebase-firestore' // cloud stuff
+    //implementation 'com.google.firebase:firebase-analytics'
+    //implementation 'com.google.firebase:firebase-auth' // authentication stuff
+    //implementation 'com.google.firebase:firebase-firestore' // cloud stuff
     implementation 'com.android.support:multidex:1.0.3'
     //https://developer.android.com/studio/build/multidex
     implementation "androidx.multidex:multidex:2.0.1"
     androidTestImplementation 'junit:junit:4.12'
-    implementation 'com.google.firebase:firebase-admin:7.1.1' // admin sdk for firebase
+    //implementation 'com.google.firebase:firebase-admin:7.1.1' // admin sdk for firebase
 }
 
 configurations {
