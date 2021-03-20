@@ -11,8 +11,22 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * CREATENEWTWO
+ * A class employed for the
+ * synthesizing of new Phojo
+ * listing.
+ *
+ * @author edgarcobian
+ * @author chrisfowler
+ * @author danallewellyn
+ * @author jamiehurd
+ */
 public class CreateNewTwo extends AppCompatActivity implements View.OnClickListener {
 
+    /**********************************
+     * DATA MEMBERS
+     ********************************/
     private static final String TAG = "Create New Two Activity";
     Button addPhoto, publishNow;
     ImageView photo1, photo2, photo3;
@@ -21,6 +35,12 @@ public class CreateNewTwo extends AppCompatActivity implements View.OnClickListe
     private static final int PICK_IMAGE = 100;
     Uri photo1URI, photo2URI, photo3URI;
 
+    /**********************************
+     * onCreate for CreateNewTwo
+     * Creates the objects necessary
+     * for a new Phojo creation
+     * @param savedInstanceState
+     ********************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +64,11 @@ public class CreateNewTwo extends AppCompatActivity implements View.OnClickListe
         photo3 = (ImageView) findViewById(R.id.photo3);
     }
 
+    /********************************
+     * onClick for CreateNewTwo's
+     * Phojo data upload options
+     * @param v
+     *******************************/
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -62,12 +87,11 @@ public class CreateNewTwo extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /***********************************
+     * openGallery for addImages button
+     **********************************/
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        // I don't know if this is the right method to open the intent in an activity??
-        // we do have to start the intent in an activity and then somehow get the image uri back
-        // if we use startActivityForResult, then we can override onActivityResult and get the data there
-        // however, when I try to implement that, it is making the app crash..........
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
@@ -75,8 +99,17 @@ public class CreateNewTwo extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            photo1URI = data.getData();
-            photo1.setImageURI(photo1URI);
+
+            if(photo1URI==null) {
+                photo1URI = data.getData();
+                photo1.setImageURI(photo1URI);
+            } else if (photo2URI==null) {
+                photo2URI = data.getData();
+                photo2.setImageURI(photo2URI);
+            } else {
+                photo3URI = data.getData();
+                photo3.setImageURI(photo3URI);
+            }
         }
     }
 }

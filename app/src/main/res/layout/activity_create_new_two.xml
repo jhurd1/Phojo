@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_marginBottom="24dp"
         android:background="#E0F2F1"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toStartOf="@+id/photo3"
         app:layout_constraintStart_toEndOf="@+id/photo1" />
@@ -121,7 +121,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:background="#E0F2F1"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="parent" />
 

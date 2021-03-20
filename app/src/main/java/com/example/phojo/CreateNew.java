@@ -75,6 +75,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
                 startActivityIfNeeded(openShareRecentActivity, 0);
                 break;
             case R.id.addImages:
+                openGallery();
                 break;
             case R.id.selectCategory:
                 break;
@@ -82,12 +83,6 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
                 break;
         }
 
-    }
-
-    // we can move openGallery() into onClick with a switch statement that determines if addImages was clicked
-    // I just have it here for now...
-    public void onAddImages(View v) {
-        openGallery();
     }
 
     /***********************************
