@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,13 +27,13 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
     /**********************************
      * DATA MEMBERS
      ********************************/
-    public static final String TAG = "checkTitleBar";
-    Button addDescription, addImages, selectCategory, publish;
+    private static final String TAG = "Create New Activity";
+    Button addPhoto, publishNow;
+    ImageView photo1, photo2, photo3;
 
     // data members used for addImages button functionality
-    // Uri is not used yet...........................
     private static final int PICK_IMAGE = 100;
-    Uri selectedImageURI;
+    Uri photo1URI, photo2URI, photo3URI;
 
     /**********************************
      * onCreate for CreateNew
@@ -49,16 +50,18 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {
-            Log.d(TAG, "hide title bar failed for createNew.java");
+            Log.d(TAG, "hide title bar failed for CreateNew.java");
         }
 
-        addDescription = (Button) findViewById(R.id.addDescription);
-        addImages = (Button) findViewById(R.id.addImages);
-        selectCategory = (Button) findViewById(R.id.selectCategory);
-        publish = (Button) findViewById(R.id.publish);
+        addPhoto = (Button) findViewById(R.id.addPhoto);
+        publishNow = (Button) findViewById(R.id.publishNow);
 
-        publish.setOnClickListener(this);
-        addImages.setOnClickListener(this);
+        publishNow.setOnClickListener(this);
+        addPhoto.setOnClickListener(this);
+
+        photo1 = (ImageView) findViewById(R.id.photo1);
+        photo2 = (ImageView) findViewById(R.id.photo2);
+        photo3 = (ImageView) findViewById(R.id.photo3);
     }
 
     /********************************
@@ -69,20 +72,19 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.publish:
+            case R.id.publishNow:
+                // we will need to add functionality here to get the category and description
+                // and the saved image Uri's.................................................
                 Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
                 openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(openShareRecentActivity, 0);
                 break;
-            case R.id.addImages:
+            case R.id.addPhoto:
                 openGallery();
                 break;
-            case R.id.selectCategory:
-                break;
-            case R.id.addDescription:
+            default:
                 break;
         }
-
     }
 
     /***********************************
@@ -90,10 +92,24 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      **********************************/
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        // I don't know if this is the right method to open the intent in an activity??
-        // we do have to start the intent in an activity and then somehow get the image uri back
-        // if we use startActivityForResult, then we can override onActivityResult and get the data there
-        // however, when I try to implement that, it is making the app crash..........
         startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+
+            if(photo1URI==null) {
+                photo1URI = data.getData();
+                photo1.setImageURI(photo1URI);
+            } else if (photo2URI==null) {
+                photo2URI = data.getData();
+                photo2.setImageURI(photo2URI);
+            } else {
+                photo3URI = data.getData();
+                photo3.setImageURI(photo3URI);
+            }
+        }
     }
 }

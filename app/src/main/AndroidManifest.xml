@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Phojo">
-        <activity android:name=".CreateNewTwo"></activity>
         <activity android:name=".CreateNew" />
         <activity android:name=".ShareRecent" />
         <activity android:name=".EditProfile" />
