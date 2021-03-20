@@ -40,6 +40,9 @@ public class UserValidatorTest
                 user.getUserTag() == null)
         {
             Log.i(TAG, "userValidator in UserValidatorTest object failed.");
+        } else
+        {
+            Log.i(TAG, "userValidator verified some user data received.");
         }
     }
 }
