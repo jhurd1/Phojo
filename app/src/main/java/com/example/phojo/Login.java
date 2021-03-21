@@ -90,7 +90,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bLogin:
-                User user = new User();
+                User user = new User(etUsername, etPassword);
                 userLocalStore.storeUserData(user);
                 userLocalStore.setUserLoggedIn(true);
                 startActivity(new Intent(this, ShareRecent.class));

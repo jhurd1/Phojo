@@ -26,10 +26,6 @@ android {
             {
                 unitTests.includeAndroidResources = true
             }
-   /* packagingOptions
-            {
-                pickFirst 'protobuf.meta'
-            }*/
 
     defaultConfig {
         applicationId "com.example.phojo"

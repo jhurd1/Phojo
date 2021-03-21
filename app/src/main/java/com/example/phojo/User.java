@@ -1,5 +1,7 @@
 package com.example.phojo;
 
+import android.widget.EditText;
+
 /**
  * USER CLASS
  * A class for containing and passing
@@ -21,6 +23,7 @@ public class User {
     private String email;
     private String password;
     private String userTag;
+    private boolean passwordPasses;
 
     /**********************************
      * ACCESSORS
@@ -51,6 +54,16 @@ public class User {
      * CONSTRUCTORS
      ********************************/
 
+    /********************************
+     * Login Constructor for User
+     * @param etUsername
+     * @param etPassword
+     *******************************/
+    public User(EditText etUsername, EditText etPassword)
+    {
+
+    }
+
     /*********************************
      * User Constructor
      * @param firstname
@@ -71,14 +84,61 @@ public class User {
 
     /*********************************
      * User Non-default Constructor
-     ********************************/
-    public User () {
+     *******************************/
+    public User() {
         this.firstname = "";
         this.middleinitial = "";
         this.lastname = "";
         this.email = "";
         this.password = "";
         this.userTag = "";
+    }
+
+    /*********************************
+     * Enforcer()
+     * Enforce password requirements
+     * @param passwordPasses
+     * For the example "p@ssw0rd" p
+     * will be false, @ will be false.
+     * So, what we need to do, is to
+     * exit the loop upon finding a
+     * digit. If no digit is found,
+     * the flag remains false and
+     * the password fails.
+     ********************************/
+    public boolean enforcePassword(boolean passwordPasses)
+    {
+        Register r = new Register();
+        password = r.getEtPassword().toString();
+        char[] charArray =
+                {
+                   '!', '@', '#', '$', '%', '^',
+                   '&', '*'
+                };
+        for(int i = 0; i < password.length(); i++)
+        {
+            boolean yesDigit = Character.isDigit(password.charAt(i));
+
+            if(yesDigit)
+            {
+                passwordPasses = true;
+            } else
+            {
+                passwordPasses = false;
+            }
+            for(int j = 0; j < charArray.length; j++)
+            {
+                if (passwordPasses && password.equals(charArray[j]))
+                {
+                    passwordPasses = true;
+                    break; // if password passes here, we're done with the test
+                } else
+                {
+                    passwordPasses = false;
+                }
+            }
+        }
+        return passwordPasses;
     }
 }
 

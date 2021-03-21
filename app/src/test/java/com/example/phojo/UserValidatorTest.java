@@ -30,7 +30,7 @@ public class UserValidatorTest
     @Test
     public static void userValidatorReturnsTrue()
     {
-        User user = new User();
+        User user = new User(etFirstName, etMiddleName, etLastName, etUsername, etPassword);
         //assertThat(UserValidatorTest.this).hasData();
         if(user.getEmail() == null ||
                 user.getFirstname() == null ||

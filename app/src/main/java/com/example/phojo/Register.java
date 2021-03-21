@@ -1,5 +1,6 @@
 package com.example.phojo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,8 +8,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-//import java.awt.Button;
 
 /**
  * REGISTER
@@ -28,8 +30,23 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
      ********************************/
     public static final String TAG = "checkTitleBar";
     Button bRegister;
-    EditText etFirstName, etMiddleName, etLastName, etUsername, etPassword, uTag;
+    EditText etFirstName;
+    EditText etMiddleName;
+    EditText etLastName;
+    EditText etUsername;
+    EditText etPassword;
+    EditText uTag;
     //private static final String TAG2 = "RegisterActivity";
+    User user = new User();
+    private boolean passCheck;
+
+    /********************************
+     * ACCESSORS
+     *******************************/
+    public EditText getEtPassword()
+    {
+        return etPassword;
+    }
 
     /*********************************
      * onCreate for Register.java
@@ -80,12 +97,29 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 String password = etPassword.getText().toString();
                 String userTag = uTag.getText().toString();
 
-                User registeredData = new User(firstname, middleinitial, lastname, username, password, userTag);
-                Log.i(TAG, "User object instantiated from Register.java.");
-             
-                startActivity(new Intent(this, Login.class));
+                //test password before continuing with registration
+                for(int i = 0; i < etPassword.length(); i++)
+                {
+                    if(etPassword.length() < 8 || user.enforcePassword(passCheck) == false)
+                    {
+                        // exit and send a message
+                        Context context = getApplicationContext();
+                        CharSequence text = "Password failed complexity test.";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Password failed requirements.");
+                        break;
+                    } else // continue with the registration
+                    {
+                        User registeredData = new User(firstname, middleinitial, lastname, username,
+                                password, userTag);
+                        Log.i(TAG, "User object instantiated from Register.java.");
 
-                break;
+                        startActivity(new Intent(this, Login.class));
+                        break; // is this break necessary?
+                    }
+                }
         }
     }
 }
