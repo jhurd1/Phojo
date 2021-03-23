@@ -4,10 +4,14 @@ package com.example.phojo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.multidex.MultiDex;
@@ -15,6 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -39,16 +46,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     TextView tvRegisterLink;
     UserLocalStore userLocalStore;
     TextView stylePhojoHeader;
-    private static final int RC_SIGN_IN = 123;
-
+    private static final String TAG = "createAccount";
+    private FirebaseAuth mAuth;
 
     /*****************************
      * Sign_in Intent
-     *
+     * commented out for now
+     * as another solution may
+     * prove more desirable.
      ****************************/
     //sign in as adapted from
     // https://firebase.google.com/docs/auth/android/firebaseui
-    public void signInIntent()
+/*    public void signInIntent()
     {
         List<AuthUI.IdpConfig> signInMethods = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
@@ -57,13 +66,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(signInMethods)
                 .build(), RC_SIGN_IN);
-    }
+    }*/
 
     /*****************************
      * onActivityResult()
-     *
+     * commented out for now
+     *      as another solution may
+     *      prove more desirable.
      ****************************/
-    @Override
+  /*  @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -81,7 +92,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 // ...
             }
         }
-    }
+    }*/
 
     /*****************************
      * MULTI_DEX_REQUIRED
@@ -105,6 +116,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        mAuth = FirebaseAuth.getInstance(); // initialize the FireBaseAuth instance
+
         // super accesses members from the parent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -126,6 +139,77 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);
         userLocalStore = new UserLocalStore(this);
+    }
+
+    /*****************************
+     * onStart()
+     * check to see if the user
+     * is currently signed in.
+     ****************************/
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+
+        FirebaseUser current = mAuth.getCurrentUser();
+        if(current != null)
+        {
+            reload();
+        }
+    }
+
+    /*****************************
+     * reload()
+     * Reloads the activity upon
+     * current user check failure.
+     ****************************/
+    private void reload()
+    {
+        finish();
+        startActivity(getIntent());
+    }
+
+    /*****************************
+     * createAccount()
+     * take email/password
+     * validate credentials
+     * create a new user
+     * as adapted from firebase
+     *      codebase
+     ****************************/
+    private void createAccount(String email, String password)
+    {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    /*****************************
+     * updateUI event
+     * just call reload() instead?
+     * @param user
+     ****************************/
+    private void updateUI(FirebaseUser user)
+    {
+        // need a broadcast receiver?
     }
 
     /*****************************
