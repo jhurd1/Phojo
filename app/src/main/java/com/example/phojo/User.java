@@ -50,6 +50,7 @@ public class User {
     public String getUserTag() {
         return userTag;
     }
+    
     /*********************************
      * CONSTRUCTORS
      ********************************/
@@ -98,11 +99,9 @@ public class User {
      * Enforcer()
      * Enforce password requirements
      * @param passwordPasses
-     * For the example "p@ssw0rd" p
-     * will be false, @ will be false.
-     * So, what we need to do, is to
      * exit the loop upon finding a
-     * digit. If no digit is found,
+     * digit and special char.
+     * If no digit and char is found,
      * the flag remains false and
      * the password fails.
      ********************************/

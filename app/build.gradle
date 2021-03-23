@@ -57,6 +57,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:support-annotations:28.0.0'
     androidTestImplementation 'junit:junit:4.12'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
@@ -76,7 +77,8 @@ dependencies {
     // https://firebase.google.com/docs/android/learn-more#bom
     implementation platform('com.google.firebase:firebase-bom:26.7.0') //optimizes firebase versions
     //implementation 'com.google.firebase:firebase-analytics'
-    //implementation 'com.google.firebase:firebase-auth' // authentication stuff
+    implementation 'com.google.firebase:firebase-auth' // authentication stuff
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     //implementation 'com.google.firebase:firebase-firestore' // cloud stuff
     implementation 'com.android.support:multidex:1.0.3'
     //https://developer.android.com/studio/build/multidex
