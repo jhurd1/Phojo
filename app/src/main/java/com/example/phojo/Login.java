@@ -71,8 +71,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        mAuth = FirebaseAuth.getInstance(); // initialize the FireBaseAuth instance
-
         // super accesses members from the parent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -90,6 +88,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
         tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
+        mAuth = FirebaseAuth.getInstance(); // initialize the FireBaseAuth instance
 
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);
