@@ -10,7 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import static android.widget.Toast.makeText;
 
 /**
  * REGISTER
@@ -39,6 +48,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
     private boolean passCheck;
+    private FirebaseAuth mAuth;
+    private String firstname = etFirstName.getText().toString();
+    private String middleinitial = etMiddleName.getText().toString();
+    private String lastname = etLastName.getText().toString();
+    private String email = etUsername.getText().toString();
+    private String password = etPassword.getText().toString();
+    private String userTag = uTag.getText().toString();
 
     /********************************
      * ACCESSORS
@@ -46,6 +62,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public EditText getEtPassword()
     {
         return etPassword;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     /*********************************
@@ -90,12 +116,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bRegister:
-                String firstname = etFirstName.getText().toString();
-                String middleinitial = etMiddleName.getText().toString();
-                String lastname = etLastName.getText().toString();
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                String userTag = uTag.getText().toString();
 
                 //test password before continuing with registration
                 for(int i = 0; i < etPassword.length(); i++)
@@ -106,20 +126,75 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         Context context = getApplicationContext();
                         CharSequence text = "Password failed complexity test.";
                         int duration = Toast.LENGTH_LONG;
-                        Toast toast = Toast.makeText(context, text, duration);
+                        Toast toast = makeText(context, text, duration);
                         toast.show();
                         Log.i(TAG, "Password failed requirements.");
                         break;
                     } else // continue with the registration
                     {
-                        User registeredData = new User(firstname, middleinitial, lastname, username,
+                        User registeredData = new User(firstname, middleinitial, lastname, email,
                                 password, userTag);
+                        createAccount(email, password); // create the object in firebase
                         Log.i(TAG, "User object instantiated from Register.java.");
-
                         startActivity(new Intent(this, Login.class));
                         break; // is this break necessary?
                     }
                 }
         }
+    }
+
+    /*****************************
+     * updateUI event
+     *
+     * we're already calling start-
+     * activity in onClick!!!
+     *
+     * @param user
+     * adapted from firebase
+     ****************************/
+    private void updateUI(FirebaseUser user)
+    {
+        //hideProgressBar();
+        if(user != null)
+        {
+            Toast.makeText(this, "Registration successful.",
+                    Toast.LENGTH_SHORT).show();
+        } else
+        {
+            Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG);
+        }
+    }
+
+    /*****************************
+     * createAccount()
+     * take email/password
+     * validate credentials
+     * create a new user in fireb.
+     * as adapted from firebase
+     *      codebase
+     ****************************/
+    private void createAccount(String email, String password)
+    {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "Register success!");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "Register failed!", task.getException());
+                            makeText(Register.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
     }
 }

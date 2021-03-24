@@ -74,7 +74,9 @@ public class User {
      * @param password
      * @param userTag
      ********************************/
-    public User (String firstname, String middleinitial, String lastname, String email, String password, String userTag) {
+    public User (String firstname, String middleinitial, String lastname, String email,
+                 String password, String userTag)
+    {
         this.firstname = firstname;
         this.middleinitial = middleinitial;
         this.lastname = lastname;
