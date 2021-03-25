@@ -81,6 +81,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth' // authentication stuff
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     //implementation 'com.google.firebase:firebase-firestore' // cloud stuff
+    implementation 'com.google.firebase:firebase-storage'
     implementation 'com.android.support:multidex:1.0.3'
     //https://developer.android.com/studio/build/multidex
     implementation "androidx.multidex:multidex:2.0.1"
