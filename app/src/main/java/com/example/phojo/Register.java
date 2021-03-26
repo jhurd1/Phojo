@@ -49,12 +49,40 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     User user = new User();
     private boolean passCheck;
     private FirebaseAuth mAuth;
-    private String firstname = etFirstName.getText().toString();
-    private String middleinitial = etMiddleName.getText().toString();
-    private String lastname = etLastName.getText().toString();
-    private String email = etUsername.getText().toString();
-    private String password = etPassword.getText().toString();
-    private String userTag = uTag.getText().toString();
+    private String firstname;
+    private String middleinitial;
+    private String lastname;
+    private String email;
+    private String password;
+    private String userTag;
+
+    /**********************************
+     * CONSTRUCTORS
+     ********************************/
+    /**********************************
+     * Default
+     ********************************/
+    public Register()
+    {
+        String test = "";
+    }
+    /**********************************
+     * Non-default
+     * passes in data members
+     ********************************/
+    public Register(EditText etFirstName, EditText etMiddleName,
+                    EditText etLastName, EditText etUsername, EditText etPassword, EditText uTag,
+                    User user)
+    {
+        this.bRegister = bRegister;
+        this.etFirstName = etFirstName;
+        this.etMiddleName = etMiddleName;
+        this.etLastName = etLastName;
+        this.etUsername = etUsername;
+        this.etPassword = etPassword;
+        this.uTag = uTag;
+        this.user = user;
+    }
 
     /********************************
      * ACCESSORS
@@ -116,7 +144,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bRegister:
-
+                firstname = etFirstName.getText().toString();
+                middleinitial = etMiddleName.getText().toString();
+                lastname = etLastName.getText().toString();
+                email = etUsername.getText().toString();
+                password = etPassword.getText().toString();
+                userTag = uTag.getText().toString();
                 //test password before continuing with registration
                 for(int i = 0; i < etPassword.length(); i++)
                 {

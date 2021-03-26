@@ -46,8 +46,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "createAccount";
     private FirebaseAuth mAuth;
     Register r = new Register();
-    private String email = r.getEmail();
-    private String password = r.getPassword();
 
     /*****************************
      * MULTI_DEX_REQUIRED
@@ -71,6 +69,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        //mAuth = FirebaseAuth.getInstance();
+        //onStart(); // see if the user is signed in
         // super accesses members from the parent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -117,7 +117,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
      * Reloads the activity upon
      * current user check failure.
      ****************************/
-    private void reload()
+    private void reload() // called by onStart()
     {
         finish();
         startActivity(getIntent());
@@ -132,13 +132,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v)
     {
+        /*String email = r.getEmail();
+        String password = r.getPassword();*/
         switch (v.getId())
         {
             case R.id.bLogin:
                 User user = new User(etUsername, etPassword);
                 userLocalStore.storeUserData(user);
                 userLocalStore.setUserLoggedIn(true);
-                signIn(email, password); // sign in with firebase
+                //signIn(email, password); // sign in with firebase
                 startActivity(new Intent(this, ShareRecent.class));
                 break;
 
@@ -156,22 +158,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
      * ADDED TO NEW BASE CLASS
      * @param user
      ****************************/
- /*   private void updateUI(FirebaseUser user)
+    private void updateUI(FirebaseUser user)
     {
 
-    }*/
+    }
 
     /*****************************
      * signIn event
      * as adapted from firebase
      * @param email, password
      ****************************/
-    private void signIn(String email, String password) {
+    private void signIn(String email, String password)
+    {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
