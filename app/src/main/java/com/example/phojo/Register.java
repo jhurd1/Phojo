@@ -71,7 +71,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      ********************************/
     public Register()
     {
-        String test = "";
+
     }
     /**********************************
      * Non-default
@@ -89,6 +89,39 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         this.etPassword = etPassword;
         this.uTag = uTag;
         this.user = user;
+    }
+
+    /********************************
+     * MUTATORS
+     *******************************/
+    public void setFirstname(String firstname)
+    {
+        this.firstname = etFirstName.getText().toString();
+    }
+
+    public void setMiddleinitial(String middleinitial)
+    {
+        this.middleinitial = etMiddleName.getText().toString();;
+    }
+
+    public void setLastname(String lastname)
+    {
+        this.lastname = etLastName.getText().toString();
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = etUsername.getText().toString();
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = etPassword.getText().toString();
+    }
+
+    public void setUserTag(String userTag)
+    {
+        this.userTag = uTag.getText().toString();
     }
 
     /********************************
@@ -127,39 +160,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public String getUserTag()
     {
         return userTag;
-    }
-
-    /********************************
-     * MUTATORS
-     *******************************/
-    public void setFirstname(String firstname)
-    {
-        this.firstname = etFirstName.getText().toString();
-    }
-
-    public void setMiddleinitial(String middleinitial)
-    {
-        this.middleinitial = etMiddleName.getText().toString();;
-    }
-
-    public void setLastname(String lastname)
-    {
-        this.lastname = etLastName.getText().toString();
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = etUsername.getText().toString();
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = etPassword.getText().toString();
-    }
-
-    public void setUserTag(String userTag)
-    {
-        this.userTag = uTag.getText().toString();
     }
 
     /*********************************
@@ -252,6 +252,54 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     }
 
     /*********************************
+     * testPassword()
+     * sets parameters
+     * calls User enforcePassword()
+     ********************************/
+    public boolean testPassword()
+    {
+        boolean passes = true;
+        setFirstname(firstname);
+        setMiddleinitial(middleinitial);
+        setLastname(lastname);
+        setEmail(email);
+        setPassword(password);
+        setUserTag(userTag);
+        for(int i = 0; i < password.length(); i++)
+        {
+            if(password.length() < 8 || user.enforcePassword(passCheck) == false)
+            {
+                // exit and send a message
+                passes = false;
+                Context context = getApplicationContext();
+                CharSequence text = "Password failed complexity test.";
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Password failed requirements.");
+                clean();
+
+                break;
+            } else // continue with the registration
+            {
+                passes = true;
+                User registeredData = new User(firstname, middleinitial, lastname, email,
+                        password, userTag);
+                createAccount(email, password); // create the object in firebase
+                saveData(); // save the object in firebase DB
+                Toast.makeText(Register.this, "Info saved.",
+                        Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "User object instantiated from Register.java.");
+                clean();
+
+                //break; // is this break necessary?
+            }
+
+        }
+        return passes;
+    }
+
+    /*********************************
      * onClick for register
      * Finalize registration
      * passing in user's registration
@@ -264,43 +312,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.bRegister:
-                setFirstname(firstname);
-                setMiddleinitial(middleinitial);
-                setLastname(lastname);
-                setEmail(email);
-                setPassword(password);
-                setUserTag(userTag);
 
                 //test password before continuing with registration
-                for(int i = 0; i < etPassword.length(); i++)
+                if(testPassword())
                 {
-                    if(etPassword.length() < 8 || user.enforcePassword(passCheck) == false)
-                    {
-                        // exit and send a message
-                        Context context = getApplicationContext();
-                        CharSequence text = "Password failed complexity test.";
-                        int duration = Toast.LENGTH_LONG;
-                        Toast toast = makeText(context, text, duration);
-                        toast.show();
-                        Log.i(TAG, "Password failed requirements.");
-                        clean();
-                        break;
-                    } else // continue with the registration
-                    {
-                        User registeredData = new User(firstname, middleinitial, lastname, email,
-                                password, userTag);
-                        createAccount(email, password); // create the object in firebase
-                        saveData(); // save the object in firebase DB
-                        Toast.makeText(Register.this, "Info saved.",
-                                Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "User object instantiated from Register.java.");
-                        clean();
-                        startActivity(new Intent(this, Login.class));
-                        break; // is this break necessary?
-                    }
+                    startActivity(new Intent(this, Login.class));
+                } else {
+                    break;
+                }
+            default:
+                break;
                 }
         }
-    }
 
     /*****************************
      * updateUI event

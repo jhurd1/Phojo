@@ -110,7 +110,7 @@ public class User {
     public boolean enforcePassword(boolean passwordPasses)
     {
         Register r = new Register();
-        password = r.getEtPassword().toString();
+        password = r.getPassword();
         char[] charArray =
                 {
                    '!', '@', '#', '$', '%', '^',
