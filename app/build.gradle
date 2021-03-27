@@ -75,9 +75,10 @@ dependencies {
     testImplementation "com.google.truth:truth:1.1.2"
     androidTestImplementation "com.google.truth:truth:1.1.2"
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+    // FIREBASE:
     // https://firebase.google.com/docs/android/learn-more#bom
     implementation platform('com.google.firebase:firebase-bom:26.7.0') //optimizes firebase versions
-    //implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-auth' // authentication stuff
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     implementation 'com.google.firebase:firebase-firestore' // cloud stuff

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.widget.Toast.makeText;
 
@@ -32,7 +35,8 @@ import static android.widget.Toast.makeText;
  * @author danallewellyn
  * @author jamiehurd
  */
-public class Register extends AppCompatActivity implements View.OnClickListener {
+public class Register extends AppCompatActivity implements View.OnClickListener
+{
 
     /**********************************
      * DATA MEMBERS
@@ -49,12 +53,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     User user = new User();
     private boolean passCheck;
     private FirebaseAuth mAuth;
+
     private String firstname;
     private String middleinitial;
     private String lastname;
     private String email;
     private String password;
     private String userTag;
+    private FirebaseDatabase myDB; // for saving to DB
+    private DatabaseReference myDBref; // for saving to DB
 
     /**********************************
      * CONSTRUCTORS
@@ -102,6 +109,59 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         return password;
     }
 
+    public String getFirstname()
+    {
+        return firstname;
+    }
+
+    public String getMiddleinitial()
+    {
+        return middleinitial;
+    }
+
+    public String getLastname()
+    {
+        return lastname;
+    }
+
+    public String getUserTag()
+    {
+        return userTag;
+    }
+
+    /********************************
+     * MUTATORS
+     *******************************/
+    public void setFirstname(String firstname)
+    {
+        this.firstname = etFirstName.getText().toString();
+    }
+
+    public void setMiddleinitial(String middleinitial)
+    {
+        this.middleinitial = etMiddleName.getText().toString();;
+    }
+
+    public void setLastname(String lastname)
+    {
+        this.lastname = etLastName.getText().toString();
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = etUsername.getText().toString();
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = etPassword.getText().toString();
+    }
+
+    public void setUserTag(String userTag)
+    {
+        this.userTag = uTag.getText().toString();
+    }
+
     /*********************************
      * onCreate for Register.java
      * Build the necessary objects
@@ -109,11 +169,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
      * @param savedInstanceState
      ********************************/
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
+        myDB = FirebaseDatabase.getInstance();
+        myDBref = myDB.getReference().child("phojoDB"); // string needs to match a backend reference?
         // hide the title bar
-        try {
+        try
+        {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e)
         {
@@ -133,6 +197,60 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         bRegister.setOnClickListener(this);
     }
 
+    /***********************************
+     * onOptionsItemSelected
+     * effectively what onClick does
+     * but testing to see if this will
+     * actually save data to DB
+     * because right now onClick isn't
+     **********************************/
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.bRegister:
+                saveData();
+                Toast.makeText(Register.this, "Data saved.",
+                        Toast.LENGTH_LONG).show();
+                clean();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /***********************************
+     * saveData()
+     * saves data in the DB
+     **********************************/
+    private void saveData()
+    {
+        setFirstname(firstname);
+        setMiddleinitial(middleinitial);
+        setLastname(lastname);
+        setEmail(email);
+        setPassword(password);
+        setUserTag(userTag);
+        User u = new User(firstname, middleinitial, lastname, email,
+                password, userTag);
+        myDBref.push().setValue(user);
+    }
+
+    /***********************************
+     * clean()
+     **********************************/
+    private void clean()
+    {
+        etFirstName.setText("");
+        etMiddleName.setText("");
+        etLastName.setText("");
+        etUsername.setText("");
+        etPassword.setText("");
+        uTag.setText("");
+        etFirstName.requestFocus(); // place focus on the first field
+    }
+
     /*********************************
      * onClick for register
      * Finalize registration
@@ -141,15 +259,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
      * @param view
      ********************************/
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
             case R.id.bRegister:
-                firstname = etFirstName.getText().toString();
-                middleinitial = etMiddleName.getText().toString();
-                lastname = etLastName.getText().toString();
-                email = etUsername.getText().toString();
-                password = etPassword.getText().toString();
-                userTag = uTag.getText().toString();
+                setFirstname(firstname);
+                setMiddleinitial(middleinitial);
+                setLastname(lastname);
+                setEmail(email);
+                setPassword(password);
+                setUserTag(userTag);
+
                 //test password before continuing with registration
                 for(int i = 0; i < etPassword.length(); i++)
                 {
@@ -162,13 +283,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         Toast toast = makeText(context, text, duration);
                         toast.show();
                         Log.i(TAG, "Password failed requirements.");
+                        clean();
                         break;
                     } else // continue with the registration
                     {
                         User registeredData = new User(firstname, middleinitial, lastname, email,
                                 password, userTag);
                         createAccount(email, password); // create the object in firebase
+                        saveData(); // save the object in firebase DB
+                        Toast.makeText(Register.this, "Info saved.",
+                                Toast.LENGTH_SHORT).show();
                         Log.i(TAG, "User object instantiated from Register.java.");
+                        clean();
                         startActivity(new Intent(this, Login.class));
                         break; // is this break necessary?
                     }
