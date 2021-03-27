@@ -45,12 +45,12 @@ public class UserLocalStore {
      *****************************/
     public void storeUserData(User user) {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
-        spEditor.putString("firstname", user.getFirstname());
-        spEditor.putString("middleinitial", user.getMiddleinitial());
-        spEditor.putString("lastname", user.getLastname());
-        spEditor.putString("username", user.getEmail());
-        spEditor.putString("password", user.getPassword());
-        spEditor.putString("userTag", user.getUserTag());
+        spEditor.putString("firstname", Register.firstname);
+        spEditor.putString("middleinitial", Register.middleinitial);
+        spEditor.putString("lastname", Register.lastname);
+        spEditor.putString("username", Register.email);
+        spEditor.putString("password", Register.password);
+        spEditor.putString("userTag", Register.userTag);
         spEditor.commit();
     }
 
