@@ -44,12 +44,13 @@ public class UserLocalStore {
      * @param user
      *****************************/
     public void storeUserData(User user) {
+        Register r = new Register();
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.putString("firstname", Register.firstname);
         spEditor.putString("middleinitial", Register.middleinitial);
         spEditor.putString("lastname", Register.lastname);
         spEditor.putString("username", Register.email);
-        spEditor.putString("password", Register.password);
+        spEditor.putString("password", r.password);
         spEditor.putString("userTag", Register.userTag);
         spEditor.commit();
     }

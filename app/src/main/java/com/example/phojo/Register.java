@@ -60,6 +60,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public static String email;
     public static String password;
     public static String userTag;
+    //password = etPassword.getText().toString();
     private FirebaseDatabase myDB; // for saving to DB
     private DatabaseReference myDBref; // for saving to DB
 
@@ -69,37 +70,33 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     /**********************************
      * Default
      ********************************/
-    public Register()
+    /*public Register()
     {
 
-    }
+    }*/
     /**********************************
      * Non-default
      * passes in data members
      ********************************/
-    public Register(EditText etFirstName, EditText etMiddleName,
-                    EditText etLastName, EditText etUsername, EditText etPassword, EditText uTag,
-                    User user)
+    public Register()
     {
         this.bRegister = bRegister;
         this.etFirstName = etFirstName;
-        firstname = etFirstName.toString();
+        //firstname = etFirstName.toString();
 
         this.etMiddleName = etMiddleName;
-        middleinitial = etMiddleName.toString();
+        //middleinitial = etMiddleName.toString();
 
         this.etLastName = etLastName;
-        lastname = etLastName.toString();
+        //lastname = etLastName.toString();
 
         this.etUsername = etUsername;
-        email = etUsername.toString();
-
+        //email = etUsername.toString();
 
         this.etPassword = etPassword;
-        password = etPassword.toString();
 
         this.uTag = uTag;
-        userTag = uTag.toString();
+        //userTag = uTag.toString();
 
         this.user = user;
     }
@@ -197,6 +194,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      ********************************/
     public boolean enforcePassword(boolean passwordPasses)
     {
+        password = etPassword.getText().toString(); //moving these more global
+        System.out.println("Password is " + password); // confirm password is passed in
+
         char[] charArray =
                 {
                         '!', '@', '#', '$', '%', '^',
@@ -237,9 +237,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     {
         boolean passes = true;
 
+        password = etPassword.getText().toString(); //moving these more global
+        System.out.println("Password is " + password); // confirm password is passed in
+
+        email = etUsername.getText().toString(); //moving these more global
+        System.out.println("Email is " + email); // confirm email is passed in
+
         for(int i = 0; i < password.length(); i++)
         {
-            System.out.println("Password is " + password);
+            System.out.println("Password is still confirm as: " + password);
             if(password.length() < 8 || enforcePassword(passCheck) == false)
             {
                 // exit and send a message

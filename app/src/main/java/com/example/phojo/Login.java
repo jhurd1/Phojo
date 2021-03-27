@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     TextView stylePhojoHeader;
     private static final String TAG = "createAccount";
     private FirebaseAuth mAuth;
-    Register r = new Register();
+    //Register r = new Register();
 
     /*****************************
      * ACCESSORS
