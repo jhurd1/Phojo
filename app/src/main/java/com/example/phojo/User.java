@@ -17,13 +17,24 @@ public class User {
     /***********************************
      * DATA MEMBERS
      **********************************/
-    private String firstname;
-    private String middleinitial;
-    private String lastname;
-    private String email;
-    private String password;
-    private String userTag;
-    private boolean passwordPasses;
+    public static String firstname;
+    public static String middleinitial;
+    public static String lastname;
+    public static String email;
+    public static String password;
+    public static String userTag;
+    public static boolean passwordPasses;
+
+    /**********************************
+     * MUTATORS
+     ********************************
+     * @return*/
+    public void setPassword(String password)
+    {
+        Login l = new Login();
+        this.password = password;
+        password = l.getEtPassword().toString();
+    }
 
     /**********************************
      * ACCESSORS
@@ -44,13 +55,13 @@ public class User {
         return email;
     }
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public String getUserTag() {
         return userTag;
     }
-    
+
     /*********************************
      * CONSTRUCTORS
      ********************************/
@@ -74,7 +85,7 @@ public class User {
      * @param password
      * @param userTag
      ********************************/
-    public User (String firstname, String middleinitial, String lastname, String email,
+    /*public User (String firstname, String middleinitial, String lastname, String email,
                  String password, String userTag)
     {
         this.firstname = firstname;
@@ -83,18 +94,19 @@ public class User {
         this.email = email;
         this.password = password;
         this.userTag = userTag;
-    }
+    }*/
 
     /*********************************
-     * User Non-default Constructor
+     * User Default Constructor
      *******************************/
-    public User() {
-        this.firstname = "";
-        this.middleinitial = "";
-        this.lastname = "";
-        this.email = "";
-        this.password = "";
-        this.userTag = "";
+   public User()
+    {
+        this.firstname = firstname; // try the getter next
+        this.middleinitial = middleinitial;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.userTag = userTag;
     }
 
     /*********************************
@@ -109,8 +121,7 @@ public class User {
      ********************************/
     public boolean enforcePassword(boolean passwordPasses)
     {
-        Register r = new Register();
-        password = r.getPassword();
+        setPassword(password);
         char[] charArray =
                 {
                    '!', '@', '#', '$', '%', '^',

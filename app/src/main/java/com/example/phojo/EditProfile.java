@@ -73,7 +73,8 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 String password = edPassword.getText().toString();
                 String userTag = edTag.getText().toString();
 
-                User editData = new User(firstname, middleinitial, lastname, username, password, userTag);
+                //User editData = new User(firstname, middleinitial, lastname, username, password, userTag);
+                User editData = new User();
 
                 Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
                 openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

@@ -54,12 +54,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     private boolean passCheck;
     private FirebaseAuth mAuth;
 
-    private String firstname;
+    /*private String firstname;
     private String middleinitial;
     private String lastname;
     private String email;
     private String password;
-    private String userTag;
+    private String userTag;*/
     private FirebaseDatabase myDB; // for saving to DB
     private DatabaseReference myDBref; // for saving to DB
 
@@ -69,32 +69,45 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     /**********************************
      * Default
      ********************************/
-    public Register()
+    /*public Register()
     {
 
-    }
+    }*/
     /**********************************
      * Non-default
      * passes in data members
      ********************************/
-    public Register(EditText etFirstName, EditText etMiddleName,
+    public Register(/*EditText etFirstName, EditText etMiddleName,
                     EditText etLastName, EditText etUsername, EditText etPassword, EditText uTag,
-                    User user)
+                    User user*/)
     {
         this.bRegister = bRegister;
         this.etFirstName = etFirstName;
+        User.firstname = etFirstName.toString();
+
         this.etMiddleName = etMiddleName;
+        User.middleinitial = etMiddleName.toString();
+
         this.etLastName = etLastName;
+        User.lastname = etLastName.toString();
+
         this.etUsername = etUsername;
+        User.email = etUsername.toString();
+
+
         this.etPassword = etPassword;
+        User.password = etPassword.toString();
+
         this.uTag = uTag;
+        User.userTag = uTag.toString();
+
         this.user = user;
     }
 
     /********************************
      * MUTATORS
      *******************************/
-    public void setFirstname(String firstname)
+   /* public void setFirstname(String firstname)
     {
         this.firstname = etFirstName.getText().toString();
     }
@@ -122,12 +135,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public void setUserTag(String userTag)
     {
         this.userTag = uTag.getText().toString();
-    }
+    }*/
 
     /********************************
      * ACCESSORS
      *******************************/
-    public EditText getEtPassword()
+    /*public EditText getEtPassword()
     {
         return etPassword;
     }
@@ -160,7 +173,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public String getUserTag()
     {
         return userTag;
-    }
+    }*/
 
     /*********************************
      * onCreate for Register.java
@@ -226,14 +239,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      **********************************/
     private void saveData()
     {
-        setFirstname(firstname);
+       /* setFirstname(firstname);
         setMiddleinitial(middleinitial);
         setLastname(lastname);
         setEmail(email);
         setPassword(password);
         setUserTag(userTag);
         User u = new User(firstname, middleinitial, lastname, email,
-                password, userTag);
+                password, userTag);*/
         myDBref.push().setValue(user);
     }
 
@@ -259,15 +272,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public boolean testPassword()
     {
         boolean passes = true;
-        setFirstname(firstname);
-        setMiddleinitial(middleinitial);
-        setLastname(lastname);
-        setEmail(email);
-        setPassword(password);
-        setUserTag(userTag);
-        for(int i = 0; i < password.length(); i++)
+
+        for(int i = 0; i < User.password.length(); i++)
         {
-            if(password.length() < 8 || user.enforcePassword(passCheck) == false)
+            System.out.println("Password is " + User.password);
+            if(User.password.length() < 8 || user.enforcePassword(passCheck) == false)
             {
                 // exit and send a message
                 passes = false;
@@ -283,9 +292,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             } else // continue with the registration
             {
                 passes = true;
-                User registeredData = new User(firstname, middleinitial, lastname, email,
-                        password, userTag);
-                createAccount(email, password); // create the object in firebase
+                /*User registeredData = new User(u.getFirstname(), u.getMiddleinitial(), u.getLastname(),
+                        u.getEmail(),
+                        password, u.getUserTag());*/
+                createAccount(User.email, User.password); // create the object in firebase
                 saveData(); // save the object in firebase DB
                 Toast.makeText(Register.this, "Info saved.",
                         Toast.LENGTH_SHORT).show();

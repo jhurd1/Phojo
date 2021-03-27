@@ -41,13 +41,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
      * DATA MEMBERS
     ****************************/
     Button bLogin;
-    EditText etUsername, etPassword;
+    EditText etUsername;
+    EditText etPassword;
     TextView tvRegisterLink;
     UserLocalStore userLocalStore;
     TextView stylePhojoHeader;
     private static final String TAG = "createAccount";
     private FirebaseAuth mAuth;
     Register r = new Register();
+
+    /*****************************
+     * ACCESSORS
+     ****************************/
+    public EditText getEtPassword()
+    {
+        return etPassword;
+    }
 
     /*****************************
      * MULTI_DEX_REQUIRED

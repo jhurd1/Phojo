@@ -72,7 +72,8 @@ public class UserLocalStore {
         String password = userLocalDatabase.getString("password", "");
         String userTag = userLocalDatabase.getString("userTag", "");
 
-        User storedUser = new User(firstname, middleinitial, lastname, username, password, userTag);
+        //User storedUser = new User(firstname, middleinitial, lastname, username, password, userTag);
+        User storedUser = new User();
         Log.i(TAG2, "User object instanced from UserLocalStore.java");
         return storedUser;
     }
