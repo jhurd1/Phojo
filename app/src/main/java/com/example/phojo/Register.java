@@ -209,13 +209,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             if(yesDigit)
             {
                 passwordPasses = true;
+                break;
             } else
             {
                 passwordPasses = false;
             }
-            for(int j = 0; j < charArray.length; j++)
+        }
+        for(int j = 0; j < password.length(); j++)
+        {
+            for(int k = 0; k < charArray.length; k++)
             {
-                if (passwordPasses && password.equals(charArray[j]))
+                if (passwordPasses && password.equals(charArray[k]))
                 {
                     passwordPasses = true;
                     break; // if password passes here, we're done with the test
@@ -225,7 +229,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        return passwordPasses;
+            return passwordPasses;
     }
 
     /*********************************
