@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.widget.Toast.makeText;
 
@@ -51,7 +53,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     EditText uTag;
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
-    private boolean passCheck;
     private FirebaseAuth mAuth;
 
     public static String firstname;
@@ -185,51 +186,33 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     /*********************************
      * Enforcer()
      * Enforce password requirements
-     * @param passwordPasses
      * exit the loop upon finding a
      * digit and special char.
      * If no digit and char is found,
      * the flag remains false and
      * the password fails.
      ********************************/
-    public boolean enforcePassword(boolean passwordPasses)
+    public boolean enforcePassword()
     {
         password = etPassword.getText().toString(); //moving these more global
         System.out.println("Password is " + password); // confirm password is passed in
 
-        char[] charArray =
-                {
-                        '!', '@', '#', '$', '%', '^',
-                        '&', '*'
-                };
-        for(int i = 0; i < password.length(); i++)
+        if(password.length()>=8)
         {
-            boolean yesDigit = Character.isDigit(password.charAt(i));
+            Pattern letter = Pattern.compile("[a-zA-z]");
+            Pattern digit = Pattern.compile("[0-9]");
+            Pattern special = Pattern.compile ("[!@#$%&*]");
 
-            if(yesDigit)
-            {
-                passwordPasses = true;
-                break;
-            } else
-            {
-                passwordPasses = false;
-            }
+
+            Matcher hasLetter = letter.matcher(password);
+            Matcher hasDigit = digit.matcher(password);
+            Matcher hasSpecial = special.matcher(password);
+
+            return hasLetter.find() && hasDigit.find() && hasSpecial.find();
+
         }
-        for(int j = 0; j < password.length(); j++)
-        {
-            for(int k = 0; k < charArray.length; k++)
-            {
-                if (passwordPasses && password.equals(charArray[k]))
-                {
-                    passwordPasses = true;
-                    break; // if password passes here, we're done with the test
-                } else
-                {
-                    passwordPasses = false;
-                }
-            }
-        }
-            return passwordPasses;
+        else
+            return false;
     }
 
     /*********************************
@@ -250,7 +233,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         for(int i = 0; i < password.length(); i++)
         {
             System.out.println("Password is still confirm as: " + password);
-            if(password.length() < 8 || enforcePassword(passCheck) == false)
+            if(!enforcePassword())
             {
                 // exit and send a message
                 passes = false;
@@ -269,14 +252,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 /*User registeredData = new User(u.getFirstname(), u.getMiddleinitial(), u.getLastname(),
                         u.getEmail(),
                         password, u.getUserTag());*/
-                createAccount(email, password); // create the object in firebase
-                saveData(); // save the object in firebase DB
+                //createAccount(email, password); // create the object in firebase  <----causing app crash<----
+                //saveData(); // save the object in firebase DB                     <----causing app crash<----
                 Toast.makeText(Register.this, "Info saved.",
                         Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "User object instantiated from Register.java.");
-                clean();
-
-                //break; // is this break necessary?
+                //clean();                                                          <----causing password to fail even if it is a valid password<----
             }
 
         }
