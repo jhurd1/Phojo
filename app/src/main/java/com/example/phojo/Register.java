@@ -53,7 +53,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     EditText uTag;
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
-    private FirebaseAuth mAuth;
+
 
     public static String firstname;
     public static String middleinitial;
@@ -62,8 +62,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public static String password;
     public static String userTag;
     //password = etPassword.getText().toString();
-    private FirebaseDatabase myDB; // for saving to DB
-    private DatabaseReference myDBref; // for saving to DB
 
     /**********************************
      * CONSTRUCTORS
@@ -113,8 +111,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
 
-        myDB = FirebaseDatabase.getInstance();
-        myDBref = myDB.getReference().child("phojoDB"); // string needs to match a backend reference?
         // hide the title bar
         try
         {
@@ -150,7 +146,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         switch(item.getItemId())
         {
             case R.id.bRegister:
-                saveData();
+                //saveData();
                 Toast.makeText(Register.this, "Data saved.",
                         Toast.LENGTH_LONG).show();
                 clean();
@@ -158,15 +154,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    /***********************************
-     * saveData()
-     * saves data in the DB
-     **********************************/
-    private void saveData()
-    {
-        myDBref.push().setValue(user);
     }
 
     /***********************************
@@ -224,15 +211,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     {
         boolean passes = true;
 
-        password = etPassword.getText().toString(); //moving these more global
+        password = etPassword.getText().toString();
         System.out.println("Password is " + password); // confirm password is passed in
 
-        email = etUsername.getText().toString(); //moving these more global
+        email = etUsername.getText().toString();
         System.out.println("Email is " + email); // confirm email is passed in
 
         for(int i = 0; i < password.length(); i++)
         {
-            System.out.println("Password is still confirm as: " + password);
+            System.out.println("Password is still confirmed as: " + password);
             if(!enforcePassword())
             {
                 // exit and send a message
@@ -249,9 +236,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             } else // continue with the registration
             {
                 passes = true;
-                /*User registeredData = new User(u.getFirstname(), u.getMiddleinitial(), u.getLastname(),
-                        u.getEmail(),
-                        password, u.getUserTag());*/
                 //createAccount(email, password); // create the object in firebase  <----causing app crash<----
                 //saveData(); // save the object in firebase DB                     <----causing app crash<----
                 Toast.makeText(Register.this, "Info saved.",
@@ -320,28 +304,20 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      * as adapted from firebase
      *      codebase
      ****************************/
-    private void createAccount(String email, String password)
+   /* private void createAccount(String email, String password)
     {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        if (task.isSuccessful())
-                        {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "Register success!");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "Register failed!", task.getException());
-                            makeText(Register.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-    }
+        if (task.isSuccessful())
+        {
+            // Sign in success, update UI with the signed-in user's information
+            Log.d(TAG, "Register success!");
+            FirebaseUser user = mAuth.getCurrentUser();
+            updateUI(user);
+        } else {
+            // If sign in fails, display a message to the user.
+            Log.w(TAG, "Register failed!", task.getException());
+            makeText(Register.this, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show();
+            updateUI(null);
+        }
+    }*/
 }
