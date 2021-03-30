@@ -6,11 +6,21 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="sign_in">Sign In</string>
     <string name="create_account"><u>Create Account</u></string>
+
     <string-array name="preference_file_key">
         <item>FIRSTNAME</item>
         <item>LASTNAME</item>
         <item>EMAIL</item>
         <item>PASSWORD</item>
         <item>TAG</item>
+    </string-array>
+
+    <string-array name="category_array">
+        <item>Vacation</item>
+        <item>Date Night</item>
+        <item>Party</item>
+        <item>Family Reunion</item>
+        <item>Spring Break</item>
+        <item>Custom</item>
     </string-array>
 </resources>
