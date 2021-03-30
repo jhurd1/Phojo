@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
         tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
-        mAuth = FirebaseAuth.getInstance(); // initialize the FireBaseAuth instance
+        mAuth = FirebaseAuth.getInstance(); // getInstane() likely auto references firebase JSON file
 
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);

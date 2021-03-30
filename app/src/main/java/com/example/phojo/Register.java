@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +56,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
 
+    private FirebaseDatabase myDB;
+    private DatabaseReference myDBref;
+
 
     public static String firstname;
     public static String middleinitial;
@@ -61,42 +66,40 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public static String email;
     public static String password;
     public static String userTag;
-    //password = etPassword.getText().toString();
 
     /**********************************
      * CONSTRUCTORS
      ********************************/
+
     /**********************************
      * Default
+     * Needed for Firebase
+     * An empty constructor
      ********************************/
-    /*public Register()
+    public Register()
     {
 
-    }*/
+    }
+
     /**********************************
      * Non-default
      * passes in data members
      ********************************/
-    public Register()
+    public Register(Button bRegister,
+            EditText etFirstName,
+            EditText etMiddleName,
+            EditText etLastName,
+            EditText etUsername,
+            EditText etPassword,
+            EditText uTag)
     {
         this.bRegister = bRegister;
         this.etFirstName = etFirstName;
-        //firstname = etFirstName.toString();
-
         this.etMiddleName = etMiddleName;
-        //middleinitial = etMiddleName.toString();
-
         this.etLastName = etLastName;
-        //lastname = etLastName.toString();
-
         this.etUsername = etUsername;
-        //email = etUsername.toString();
-
         this.etPassword = etPassword;
-
         this.uTag = uTag;
-        //userTag = uTag.toString();
-
         this.user = user;
     }
 
@@ -111,6 +114,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
 
+        // database pieces
+        myDB = FirebaseDatabase.getInstance();
+        myDBref = myDB.getReference().child("PhojoDB"); // name of the table to be instantiated
+
         // hide the title bar
         try
         {
@@ -120,15 +127,23 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             Log.d(TAG,"hide title bar failed for createNew.java");
         }
 
-        setContentView(R.layout.activity_register);
+        //setContentView(R.layout.a); // need this still with a menu item?
 
-        etFirstName = (EditText) findViewById(R.id.etFirstName) ;
+        etFirstName = findViewById(R.id.etFirstName);
+        etMiddleName = findViewById(R.id.etMiddleName);
+        etLastName = findViewById(R.id.etLastName);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        bRegister = findViewById(R.id.bRegister);
+        uTag = findViewById(R.id.uTag);
+
+        /*etFirstName = (EditText) findViewById(R.id.etFirstName) ;
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bRegister = (Button) findViewById(R.id.bRegister);
-        uTag = (EditText) findViewById(R.id.uTag);
+        uTag = (EditText) findViewById(R.id.uTag);*/
 
         bRegister.setOnClickListener(this);
     }
@@ -141,19 +156,52 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      * because right now onClick isn't
      **********************************/
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) // replace with EditText
+    // as this is what corresponds to register.xml items
     {
         switch(item.getItemId())
         {
-            case R.id.bRegister:
-                //saveData();
-                Toast.makeText(Register.this, "Data saved.",
+            case R.id.etFirstName:
+            case R.id.etMiddleName:
+            case R.id.etLastName:
+            case R.id.etUsername:
+            case R.id.etPassword:
+            case R.id.uTag:
+                saveData();
+                Toast.makeText(Register.this, "Testing save.",
                         Toast.LENGTH_LONG).show();
                 clean();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /***********************************
+     * onCreateOptionsMenu
+     **********************************/
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_register, menu);
+        return true;
+    }
+
+    /***********************************
+     * saveData
+     **********************************/
+    private void saveData()
+    {
+        firstname = etFirstName.getText().toString();
+        middleinitial = etMiddleName.getText().toString();
+        lastname = etLastName.getText().toString();
+        email = etUsername.getText().toString();
+        password = etPassword.getText().toString();
+        userTag = uTag.getText().toString();
+
+        User user = new User(firstname, middleinitial, lastname, email, password, userTag);
+
+        myDBref.push().setValue(user); // need to instance a new object above and pass in here
     }
 
     /***********************************
