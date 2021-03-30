@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/whereLifeMeetsLens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,80 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/etFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:hint="first name"
-            app:layout_constraintBottom_toTopOf="@+id/etMiddleName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:title="@string/first name"
-            app:showAsAction="ifRoom" />
-        <item android:id="@+id/etMiddleName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:hint="middle name"
-            app:layout_constraintBottom_toTopOf="@+id/etLastName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:title="@string/middle name" />
-        <item android:id="@+id/etLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:hint="last name"
-            app:layout_constraintBottom_toTopOf="@+id/etUsername"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:title="@string/last name" />
-        <item android:id="@+id/etUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:hint="username"
-            app:layout_constraintBottom_toTopOf="@+id/uTag"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:title="@string/username" />
-        <item android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="32dp"
-            android:hint="password"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/bRegister"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:title="@string/password" />
-        <item android:id="@+id/uTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:hint="user tag"
-            app:layout_constraintBottom_toTopOf="@+id/etPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:title="@string/user tag" />
-        <!--Example menu stuff I may not need
-         android:icon="@drawable/ic_new_game"
-         -->
-    </menu>
-    <!--<EditText
+    <EditText
         android:id="@+id/etFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,9 +39,9 @@
         android:hint="first name"
         app:layout_constraintBottom_toTopOf="@+id/etMiddleName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<EditText
+    <EditText
         android:id="@+id/etMiddleName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,9 +51,9 @@
         android:hint="middle name"
         app:layout_constraintBottom_toTopOf="@+id/etLastName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<EditText
+    <EditText
         android:id="@+id/etLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,9 +63,9 @@
         android:hint="last name"
         app:layout_constraintBottom_toTopOf="@+id/etUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<EditText
+    <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -148,11 +75,11 @@
         android:hint="username"
         app:layout_constraintBottom_toTopOf="@+id/uTag"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!--android:layout_padding="10dp"-->
 
-    <!--<EditText
+    <EditText
         android:id="@+id/uTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,9 +89,9 @@
         android:hint="user tag"
         app:layout_constraintBottom_toTopOf="@+id/etPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<EditText
+    <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -175,7 +102,7 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/bRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/bRegister"

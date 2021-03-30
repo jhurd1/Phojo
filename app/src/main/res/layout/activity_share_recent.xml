@@ -87,11 +87,7 @@
         app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-<<<<<<< HEAD
-=======
-
->>>>>>> e1415feab67dd86da9e7f25fb481e4c893386a53
+    
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="125dp"
