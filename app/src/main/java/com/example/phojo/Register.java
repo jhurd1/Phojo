@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,11 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,11 +36,11 @@ import static android.widget.Toast.makeText;
  */
 public class Register extends AppCompatActivity implements View.OnClickListener
 {
-
+    private FirebaseAuth mAuth;
     /**********************************
      * DATA MEMBERS
      ********************************/
-    public static final String TAG = "checkTitleBar";
+    public static final String TAG = "Register";
     Button bRegister;
     EditText etFirstName;
     EditText etMiddleName;
@@ -110,7 +107,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        mAuth = FirebaseAuth.getInstance();
         // hide the title bar
         try
         {
@@ -140,21 +137,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      * actually save data to DB
      * because right now onClick isn't
      **********************************/
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item)
-    {
-        switch(item.getItemId())
-        {
-            case R.id.bRegister:
-                //saveData();
-                Toast.makeText(Register.this, "Data saved.",
-                        Toast.LENGTH_LONG).show();
-                clean();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+//    {
+//        switch(item.getItemId())
+//        {
+//            case R.id.bRegister:
+//                //saveData();
+//                Toast.makeText(Register.this, "Data saved.",
+//                        Toast.LENGTH_LONG).show();
+//                clean();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     /***********************************
      * clean()
@@ -190,13 +187,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             Pattern digit = Pattern.compile("[0-9]");
             Pattern special = Pattern.compile ("[!@#$%&*]");
 
-
             Matcher hasLetter = letter.matcher(password);
             Matcher hasDigit = digit.matcher(password);
             Matcher hasSpecial = special.matcher(password);
 
             return hasLetter.find() && hasDigit.find() && hasSpecial.find();
-
         }
         else
             return false;
@@ -261,18 +256,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         switch (view.getId())
         {
             case R.id.bRegister:
-
                 //test password before continuing with registration
-                if(testPassword())
+                if(true || testPassword())
                 {
-                    startActivity(new Intent(this, Login.class));
-                } else {
-                    break;
+                    createAccount(etUsername.getText().toString(), etPassword.getText().toString(), etFirstName.getText().toString(), etLastName.getText().toString());
+                    //startActivity(new Intent(this, Login.class));
                 }
             default:
                 break;
-                }
         }
+    }
 
     /*****************************
      * updateUI event
@@ -304,20 +297,38 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      * as adapted from firebase
      *      codebase
      ****************************/
-   /* private void createAccount(String email, String password)
+    private void createAccount(String email, String password, String firstname, String lastname)
     {
-        if (task.isSuccessful())
-        {
-            // Sign in success, update UI with the signed-in user's information
-            Log.d(TAG, "Register success!");
-            FirebaseUser user = mAuth.getCurrentUser();
-            updateUI(user);
-        } else {
-            // If sign in fails, display a message to the user.
-            Log.w(TAG, "Register failed!", task.getException());
-            makeText(Register.this, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show();
-            updateUI(null);
-        }
-    }*/
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(Register.this, task -> {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "createUserWithEmail:success");
+                    FirebaseUser user = mAuth.getCurrentUser();
+
+                    // Update a user's profile
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(firstname + " " + lastname)
+                            .build();
+
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User profile updated.");
+                                    }
+                                }
+                            });
+                    updateUI(user);
+                    startActivity(new Intent(this, ShareRecent.class));
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                    Toast.makeText(Register.this, "Authentication failed." + task.getException().getLocalizedMessage(),
+                            Toast.LENGTH_SHORT).show();
+                    updateUI(null);
+                }
+            });
+    }
 }
