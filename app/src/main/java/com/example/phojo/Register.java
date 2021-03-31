@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +52,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     EditText uTag;
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
+//    readWrite rW = new readWrite();
+
+//    private FirebaseDatabase myDB;
+//    private DatabaseReference myDBref;
 
 
     public static String firstname;
@@ -58,42 +64,40 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     public static String email;
     public static String password;
     public static String userTag;
-    //password = etPassword.getText().toString();
 
     /**********************************
      * CONSTRUCTORS
      ********************************/
+
     /**********************************
      * Default
+     * Needed for Firebase
+     * An empty constructor
      ********************************/
-    /*public Register()
+    public Register()
     {
 
-    }*/
+    }
+
     /**********************************
      * Non-default
      * passes in data members
      ********************************/
-    public Register()
+    public Register(
+            EditText etFirstName,
+            EditText etMiddleName,
+            EditText etLastName,
+            EditText etUsername,
+            EditText etPassword,
+            EditText uTag)
     {
-        this.bRegister = bRegister;
+        //this.bRegister = bRegister;
         this.etFirstName = etFirstName;
-        //firstname = etFirstName.toString();
-
         this.etMiddleName = etMiddleName;
-        //middleinitial = etMiddleName.toString();
-
         this.etLastName = etLastName;
-        //lastname = etLastName.toString();
-
         this.etUsername = etUsername;
-        //email = etUsername.toString();
-
         this.etPassword = etPassword;
-
         this.uTag = uTag;
-        //userTag = uTag.toString();
-
         this.user = user;
     }
 
@@ -108,6 +112,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        // database pieces
+//        myDB = FirebaseDatabase.getInstance();
+//        myDBref = myDB.getReference().child("PhojoDB"); // name of the table to be instantiated
+
         // hide the title bar
         try
         {
@@ -119,52 +127,23 @@ public class Register extends AppCompatActivity implements View.OnClickListener
 
         setContentView(R.layout.activity_register);
 
-        etFirstName = (EditText) findViewById(R.id.etFirstName) ;
+        etFirstName = findViewById(R.id.etFirstName);
+        etMiddleName = findViewById(R.id.etMiddleName);
+        etLastName = findViewById(R.id.etLastName);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        bRegister = findViewById(R.id.bRegister);
+        uTag = findViewById(R.id.uTag);
+
+        /*etFirstName = (EditText) findViewById(R.id.etFirstName) ;
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bRegister = (Button) findViewById(R.id.bRegister);
-        uTag = (EditText) findViewById(R.id.uTag);
+        uTag = (EditText) findViewById(R.id.uTag);*/
 
         bRegister.setOnClickListener(this);
-    }
-
-    /***********************************
-     * onOptionsItemSelected
-     * effectively what onClick does
-     * but testing to see if this will
-     * actually save data to DB
-     * because right now onClick isn't
-     **********************************/
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item)
-//    {
-//        switch(item.getItemId())
-//        {
-//            case R.id.bRegister:
-//                //saveData();
-//                Toast.makeText(Register.this, "Data saved.",
-//                        Toast.LENGTH_LONG).show();
-//                clean();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-    /***********************************
-     * clean()
-     **********************************/
-    private void clean()
-    {
-        etFirstName.setText("");
-        etMiddleName.setText("");
-        etLastName.setText("");
-        etUsername.setText("");
-        etPassword.setText("");
-        uTag.setText("");
-        etFirstName.requestFocus(); // place focus on the first field
     }
 
     /*********************************
@@ -212,6 +191,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         email = etUsername.getText().toString();
         System.out.println("Email is " + email); // confirm email is passed in
 
+        firstname = etFirstName.getText().toString();
+        lastname = etLastName.getText().toString();
+
         for(int i = 0; i < password.length(); i++)
         {
             System.out.println("Password is still confirmed as: " + password);
@@ -225,14 +207,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 Toast toast = makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Password failed requirements.");
-                clean();
+//                rW.clean();
 
                 break;
             } else // continue with the registration
             {
                 passes = true;
-                //createAccount(email, password); // create the object in firebase  <----causing app crash<----
-                //saveData(); // save the object in firebase DB                     <----causing app crash<----
+//                rw.createAccount(email, password); // create the object in firebase  <----causing app crash<----
+//                rW.saveData(); // save the object in firebase DB                     <----causing app crash<----
                 Toast.makeText(Register.this, "Info saved.",
                         Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "User object instantiated from Register.java.");
@@ -260,7 +242,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 if(true || testPassword())
                 {
                     createAccount(etUsername.getText().toString(), etPassword.getText().toString(), etFirstName.getText().toString(), etLastName.getText().toString());
-                    //startActivity(new Intent(this, Login.class));
                 }
             default:
                 break;

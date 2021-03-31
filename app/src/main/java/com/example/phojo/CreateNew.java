@@ -1,11 +1,15 @@
 package com.example.phojo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -41,6 +45,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      * for a new Phojo creation
      * @param savedInstanceState
      ********************************/
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,22 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         photo1 = (ImageView) findViewById(R.id.photo1);
         photo2 = (ImageView) findViewById(R.id.photo2);
         photo3 = (ImageView) findViewById(R.id.photo3);
+
+        // START of code for default category dropdown list
+        String[] defaultCategories ={"vacation", "date night", "birthday party", "family reunion"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, defaultCategories);
+        AutoCompleteTextView category =  (AutoCompleteTextView)findViewById(R.id.category);
+        category.setAdapter(adapter); //setting the adapter data into the AutoCompleteTextView
+        category.setOnTouchListener(new View.OnTouchListener() { //shows default categories when category is selected
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                category.showDropDown();
+                return false;
+            }
+        });
+        // END of code for default category dropdown list
+
     }
 
     /********************************

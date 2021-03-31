@@ -6,6 +6,10 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="sign_in">Sign In</string>
     <string name="create_account"><u>Create Account</u></string>
+    <string name="first_name">first_name</string>
+    <string name="middle_initial">middle_initial</string>
+    <string name="last_name">last_name</string>
+    <string name="user_name">user_name</string>
 
     <string-array name="preference_file_key">
         <item>FIRSTNAME</item>

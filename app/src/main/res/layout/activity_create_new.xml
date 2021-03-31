@@ -78,6 +78,21 @@
         android:layout_marginBottom="36dp"
         android:text="Add a Photo"
         android:textSize="19sp"
+        app:layout_constraintBottom_toTopOf="@+id/category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="24dp"
+        android:completionHint="\t\t(or enter a custom category)"
+        android:completionThreshold="0"
+        android:ems="10"
+        android:hint="enter category here"
         app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -88,28 +103,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
-        android:gravity="start|top"
+        android:gravity="start|bottom"
         android:hint="\n\n\nenter description here"
         android:inputType="textMultiLine"
         android:lines="4"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/category"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/category"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:hint="enter category here"
-        android:inputType="textShortMessage"
-        android:textAlignment="viewStart"
         app:layout_constraintBottom_toTopOf="@+id/publishNow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
