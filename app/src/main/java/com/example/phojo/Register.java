@@ -51,6 +51,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     EditText uTag;
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
+    readWrite rW = new readWrite();
 
     private FirebaseDatabase myDB;
     private DatabaseReference myDBref;
@@ -81,7 +82,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      * Non-default
      * passes in data members
      ********************************/
-    public Register(Button bRegister,
+    public Register(
             EditText etFirstName,
             EditText etMiddleName,
             EditText etLastName,
@@ -89,7 +90,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             EditText etPassword,
             EditText uTag)
     {
-        this.bRegister = bRegister;
+        //this.bRegister = bRegister;
         this.etFirstName = etFirstName;
         this.etMiddleName = etMiddleName;
         this.etLastName = etLastName;
@@ -123,8 +124,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
             Log.d(TAG,"hide title bar failed for createNew.java");
         }
 
-        //setContentView(R.layout.activity_register); // need this still with a menu item?
-        //setContentView(R.menu.menu_activity_register);
+        setContentView(R.layout.activity_register);
 
         etFirstName = findViewById(R.id.etFirstName);
         etMiddleName = findViewById(R.id.etMiddleName);
@@ -143,76 +143,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         uTag = (EditText) findViewById(R.id.uTag);*/
 
         bRegister.setOnClickListener(this);
-    }
-
-    /***********************************
-     * onOptionsItemSelected
-     * effectively what onClick does
-     * but testing to see if this will
-     * actually save data to DB
-     * because right now onClick isn't
-     **********************************/
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) // replace with EditText
-    // as this is what corresponds to register.xml items
-    {
-        switch(item.getItemId())
-        {
-            case R.id.etFirstName:
-            case R.id.etMiddleName:
-            case R.id.etLastName:
-            case R.id.etUsername:
-            case R.id.etPassword:
-            case R.id.uTag:
-                saveData();
-                Toast.makeText(Register.this, "Testing save.",
-                        Toast.LENGTH_LONG).show();
-                clean();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /***********************************
-     * onCreateOptionsMenu
-     **********************************/
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_activity_register, menu);
-        return true;
-    }
-
-    /***********************************
-     * saveData
-     **********************************/
-    private void saveData()
-    {
-        firstname = etFirstName.getText().toString();
-        middleinitial = etMiddleName.getText().toString();
-        lastname = etLastName.getText().toString();
-        email = etUsername.getText().toString();
-        password = etPassword.getText().toString();
-        userTag = uTag.getText().toString();
-
-        User user = new User(firstname, middleinitial, lastname, email, password, userTag);
-
-        myDBref.push().setValue(user); // need to instance a new object above and pass in here
-    }
-
-    /***********************************
-     * clean()
-     **********************************/
-    private void clean()
-    {
-        etFirstName.setText("");
-        etMiddleName.setText("");
-        etLastName.setText("");
-        etUsername.setText("");
-        etPassword.setText("");
-        uTag.setText("");
-        etFirstName.requestFocus(); // place focus on the first field
     }
 
     /*********************************
@@ -275,14 +205,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 Toast toast = makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Password failed requirements.");
-                clean();
+                rW.clean();
 
                 break;
             } else // continue with the registration
             {
                 passes = true;
-                //createAccount(email, password); // create the object in firebase  <----causing app crash<----
-                //saveData(); // save the object in firebase DB                     <----causing app crash<----
+                //rW.createAccount(email, password); // create the object in firebase  <----causing app crash<----
+                rW.saveData(); // save the object in firebase DB                     <----causing app crash<----
                 Toast.makeText(Register.this, "Info saved.",
                         Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "User object instantiated from Register.java.");
@@ -318,51 +248,4 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 break;
                 }
         }
-
-    /*****************************
-     * updateUI event
-     *
-     * we're already calling start-
-     * activity in onClick!!!
-     *
-     * @param user
-     * adapted from firebase
-     ****************************/
-    private void updateUI(FirebaseUser user)
-    {
-        //hideProgressBar();
-        if(user != null)
-        {
-            Toast.makeText(this, "Registration successful.",
-                    Toast.LENGTH_SHORT).show();
-        } else
-        {
-            Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG);
-        }
-    }
-
-    /*****************************
-     * createAccount()
-     * take email/password
-     * validate credentials
-     * create a new user in fireb.
-     * as adapted from firebase
-     *      codebase
-     ****************************/
-   /* private void createAccount(String email, String password)
-    {
-        if (task.isSuccessful())
-        {
-            // Sign in success, update UI with the signed-in user's information
-            Log.d(TAG, "Register success!");
-            FirebaseUser user = mAuth.getCurrentUser();
-            updateUI(user);
-        } else {
-            // If sign in fails, display a message to the user.
-            Log.w(TAG, "Register failed!", task.getException());
-            makeText(Register.this, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show();
-            updateUI(null);
-        }
-    }*/
 }
