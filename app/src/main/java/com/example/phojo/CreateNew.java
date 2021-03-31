@@ -172,7 +172,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      **********************************/
     private void uploadPhoto(Uri fileUri) {
         Log.d(TAG, "uploadFromUri:src:" + fileUri.toString());
-
+        //fileUri = intent.getParcelableExtra(/*a path to a photo??*/"");
         // Save the File URI
         if(photo1URI != null)
         {
