@@ -11,18 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.multidex.MultiDex;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -100,7 +94,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
         tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
-        mAuth = FirebaseAuth.getInstance(); // getInstane() likely auto references firebase JSON file
+        mAuth = FirebaseAuth.getInstance(); // getInstance() likely auto references firebase JSON file
 
         bLogin.setOnClickListener(this);
         tvRegisterLink.setOnClickListener(this);
@@ -144,18 +138,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v)
     {
-        /*String email = r.getEmail();
-        String password = r.getPassword();*/
         switch (v.getId())
         {
             case R.id.bLogin:
                 User user = new User(etUsername, etPassword);
                 userLocalStore.storeUserData(user);
                 userLocalStore.setUserLoggedIn(true);
-                //signIn(email, password); // sign in with firebase
-                startActivity(new Intent(this, ShareRecent.class));
+                signIn(etUsername.getText().toString(), etPassword.getText().toString()); // sign in with firebase
                 break;
-
             case R.id.tvRegisterLink:
                 startActivity(new Intent(this, Register.class));
                 break;
@@ -170,8 +160,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
  /*   private void signIn(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+            .addOnCompleteListener(Login.this, task -> {
+                if (task.isSuccessful())
                 {
+<<<<<<< HEAD
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
@@ -191,3 +183,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                 });*/
     }
+=======
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    updateUI(user);
+                    startActivity(new Intent(this, ShareRecent.class));
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(Login.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                    updateUI(null);
+                }
+            });
+    }
+
+}
+>>>>>>> 245a5b27ea4ada608218ac7ce71ec03e9fc82ac4
