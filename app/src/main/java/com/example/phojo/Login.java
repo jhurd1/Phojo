@@ -106,7 +106,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
      * check to see if the user
      * is currently signed in.
      ****************************/
-    @Override
+   /* @Override
     public void onStart()
     {
         super.onStart();
@@ -116,7 +116,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         {
             reload();
         }
-    }
+    }*/
 
     /*****************************
      * reload()
@@ -153,29 +153,37 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     /*****************************
-     * updateUI
-     * as adapted from firebase
-     * THIS CODE IS REPEATED IN
-     * THE PROGRAM SO CAN BE
-     * ADDED TO NEW BASE CLASS
-     * @param user
-     ****************************/
-    private void updateUI(FirebaseUser user)
-    {
-
-    }
-
-    /*****************************
      * signIn event
      * as adapted from firebase
      * @param email, password
      ****************************/
-    private void signIn(String email, String password)
+ /*   private void signIn(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(Login.this, task -> {
                 if (task.isSuccessful())
                 {
+<<<<<<< HEAD
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+                    }
+                });*/
+    }
+=======
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success");
                     FirebaseUser user = mAuth.getCurrentUser();
@@ -192,3 +200,4 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
 }
+>>>>>>> 245a5b27ea4ada608218ac7ce71ec03e9fc82ac4

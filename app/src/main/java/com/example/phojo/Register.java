@@ -207,7 +207,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 Toast toast = makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Password failed requirements.");
+<<<<<<< HEAD
+                //rW.clean();
+=======
 //                rW.clean();
+>>>>>>> 245a5b27ea4ada608218ac7ce71ec03e9fc82ac4
 
                 break;
             } else // continue with the registration
