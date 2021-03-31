@@ -15,6 +15,14 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+
+
 /**
  * CREATENEW
  * A class employed for the
@@ -26,7 +34,8 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author danallewellyn
  * @author jamiehurd
  */
-public class CreateNew extends AppCompatActivity implements View.OnClickListener {
+public class CreateNew extends AppCompatActivity implements View.OnClickListener
+{
 
     /**********************************
      * DATA MEMBERS
@@ -39,6 +48,14 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
     private static final int PICK_IMAGE = 100;
     Uri photo1URI, photo2URI, photo3URI;
 
+    // firebase cloud storage refs
+    private Uri mDownloadUrl = null;
+    private StorageReference mStorageRef;
+
+    //StorageReference storageRef = storage.getReference();
+    //StorageReference mountainImagesRef = storageRef.child("filePathTo/whatPic.jpg");
+
+
     /**********************************
      * onCreate for CreateNew
      * Creates the objects necessary
@@ -47,12 +64,17 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      ********************************/
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new);
 
+        // get firebase authentication
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         // hide the title bar
-        try {
+        try
+        {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {
             Log.d(TAG, "hide title bar failed for CreateNew.java");
@@ -91,8 +113,10 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      * @param v
      *******************************/
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.publishNow:
                 // we will need to add functionality here to get the category and description
                 // and the saved image Uri's.................................................
@@ -102,6 +126,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.addPhoto:
                 openGallery();
+                //uploadPhoto(fileUri);
                 break;
             default:
                 break;
@@ -111,20 +136,26 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
     /***********************************
      * openGallery for addImages button
      **********************************/
-    private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+    private void openGallery()
+    {
+        Intent gallery = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
 
-            if(photo1URI==null) {
+            if(photo1URI==null)
+            {
                 photo1URI = data.getData();
                 photo1.setImageURI(photo1URI);
-            } else if (photo2URI==null) {
+            } else if (photo2URI==null)
+            {
                 photo2URI = data.getData();
                 photo2.setImageURI(photo2URI);
             } else {
@@ -133,4 +164,41 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
             }
         }
     }
-}
+
+    /***********************************
+     * uploadPhoto
+     * adapted from https://github.com/
+     * firebase/
+     **********************************/
+    private void uploadPhoto(Uri fileUri) {
+        Log.d(TAG, "uploadFromUri:src:" + fileUri.toString());
+
+        // Save the File URI
+        if(photo1URI != null)
+        {
+            Uri mFileUri = photo1URI;
+        }
+        if(photo2URI != null)
+        {
+            Uri mFileUri2 = photo2URI;
+        }
+        if(photo3URI != null)
+        {
+            Uri mFileUri3 = photo3URI;
+        }
+
+        mDownloadUrl = null;
+
+        final StorageReference photoRef = mStorageRef.child("photos")
+                .child(fileUri.getLastPathSegment());
+        photoRef.putFile(fileUri).
+                addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>()
+                {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot)
+                    {
+                       Log.i(TAG, "Pushing in progress.");
+                    }
+                });
+    }
+    }
