@@ -52,11 +52,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     EditText uTag;
     //private static final String TAG2 = "RegisterActivity";
     User user = new User();
-//    readWrite rW = new readWrite();
-
-//    private FirebaseDatabase myDB;
-//    private DatabaseReference myDBref;
-
 
     public static String firstname;
     public static String middleinitial;
@@ -112,9 +107,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        // database pieces
-//        myDB = FirebaseDatabase.getInstance();
-//        myDBref = myDB.getReference().child("PhojoDB"); // name of the table to be instantiated
 
         // hide the title bar
         try
@@ -135,14 +127,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         bRegister = findViewById(R.id.bRegister);
         uTag = findViewById(R.id.uTag);
 
-        /*etFirstName = (EditText) findViewById(R.id.etFirstName) ;
-        etMiddleName = (EditText) findViewById(R.id.etMiddleName);
-        etLastName = (EditText) findViewById(R.id.etLastName);
-        etUsername = (EditText) findViewById(R.id.etUsername);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        bRegister = (Button) findViewById(R.id.bRegister);
-        uTag = (EditText) findViewById(R.id.uTag);*/
-
         bRegister.setOnClickListener(this);
     }
 
@@ -157,10 +141,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener
      ********************************/
     public boolean enforcePassword()
     {
-        password = etPassword.getText().toString(); //moving these more global
+        password = etPassword.getText().toString();
         System.out.println("Password is " + password); // confirm password is passed in
 
-        if(password.length()>=8)
+        if(password.length() >= 8)
         {
             Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern digit = Pattern.compile("[0-9]");
@@ -207,24 +191,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 Toast toast = makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Password failed requirements.");
-<<<<<<< HEAD
                 //rW.clean();
-=======
-//                rW.clean();
->>>>>>> 245a5b27ea4ada608218ac7ce71ec03e9fc82ac4
-
                 break;
             } else // continue with the registration
             {
                 passes = true;
-//                rw.createAccount(email, password); // create the object in firebase  <----causing app crash<----
-//                rW.saveData(); // save the object in firebase DB                     <----causing app crash<----
                 Toast.makeText(Register.this, "Info saved.",
                         Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "User object instantiated from Register.java.");
-                //clean();                                                          <----causing password to fail even if it is a valid password<----
             }
-
         }
         return passes;
     }
@@ -245,7 +220,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 //test password before continuing with registration
                 if(true || testPassword())
                 {
-                    createAccount(etUsername.getText().toString(), etPassword.getText().toString(), etFirstName.getText().toString(), etLastName.getText().toString());
+                    createAccount(etUsername.getText().toString(),
+                            etPassword.getText().toString(),
+                            etFirstName.getText().toString(),
+                            etLastName.getText().toString());
                 }
             default:
                 break;
@@ -254,10 +232,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener
 
     /*****************************
      * updateUI event
-     *
      * we're already calling start-
      * activity in onClick!!!
-     *
      * @param user
      * adapted from firebase
      ****************************/
@@ -310,7 +286,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(Register.this, "Authentication failed." + task.getException().getLocalizedMessage(),
+                    Toast.makeText(Register.this, "Authentication failed." +
+                                    task.getException().getLocalizedMessage(),
                             Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }

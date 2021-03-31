@@ -55,7 +55,7 @@ public class readWrite extends AppCompatActivity
      ********************************/
     public readWrite()
     {
-        //myDBref.child("users"); // db ref doc: string passed in is path
+
     }
 
     /***********************************
@@ -116,45 +116,6 @@ public class readWrite extends AppCompatActivity
         myDBref.setValue(reg);
         clean();
     }
-
-    /***********************************
-     * onOptionsItemSelected
-     * looks specific to menu item
-     **********************************/
-    /*@Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) // replace with EditText
-    // as this is what corresponds to register.xml items
-    {
-        switch(item.getItemId())
-        {
-            case R.id.etFirstName:
-            case R.id.etMiddleName:
-            case R.id.etLastName:
-            case R.id.etUsername:
-            case R.id.etPassword:
-            case R.id.uTag:
-                saveData();
-                Toast.makeText(readWrite.this, "Testing save.",
-                        Toast.LENGTH_LONG).show();
-                clean();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
-
-    /***********************************
-     * onCreateOptionsMenu
-     * this is for instantiating
-     * a menu object
-     * Still need it?
-     **********************************/
-   /* public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_activity_register, menu);
-        return true;
-    }*/
 
     /***********************************
      * saveData
