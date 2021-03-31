@@ -112,7 +112,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
      * check to see if the user
      * is currently signed in.
      ****************************/
-    @Override
+   /* @Override
     public void onStart()
     {
         super.onStart();
@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         {
             reload();
         }
-    }
+    }*/
 
     /*****************************
      * reload()
@@ -163,24 +163,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     /*****************************
-     * updateUI
-     * as adapted from firebase
-     * THIS CODE IS REPEATED IN
-     * THE PROGRAM SO CAN BE
-     * ADDED TO NEW BASE CLASS
-     * @param user
-     ****************************/
-    private void updateUI(FirebaseUser user)
-    {
-
-    }
-
-    /*****************************
      * signIn event
      * as adapted from firebase
      * @param email, password
      ****************************/
-    private void signIn(String email, String password)
+ /*   private void signIn(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
@@ -202,7 +189,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             //updateUI(null);
                         }
                     }
-                });
+                });*/
     }
-
-}

@@ -55,7 +55,7 @@ public class readWrite extends AppCompatActivity
      ********************************/
     public readWrite()
     {
-        myDBref.child("users"); // db ref doc: string passed in is path
+        //myDBref.child("users"); // db ref doc: string passed in is path
     }
 
     /***********************************
@@ -111,12 +111,17 @@ public class readWrite extends AppCompatActivity
                         r.etUsername,
                         r.etPassword,
                         r.uTag));
+        Toast.makeText(readWrite.this, "Testing save.",
+                Toast.LENGTH_LONG).show();
+        myDBref.setValue(reg);
+        clean();
     }
+
     /***********************************
      * onOptionsItemSelected
      * looks specific to menu item
      **********************************/
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) // replace with EditText
     // as this is what corresponds to register.xml items
     {
@@ -136,7 +141,7 @@ public class readWrite extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     /***********************************
      * onCreateOptionsMenu
@@ -144,12 +149,12 @@ public class readWrite extends AppCompatActivity
      * a menu object
      * Still need it?
      **********************************/
-    public boolean onCreateOptionsMenu(Menu menu)
+   /* public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_activity_register, menu);
         return true;
-    }
+    }*/
 
     /***********************************
      * saveData
@@ -193,7 +198,7 @@ public class readWrite extends AppCompatActivity
      * @param user
      * adapted from firebase
      ****************************/
-    public void updateUI(FirebaseUser user)
+  /*  public void updateUI(FirebaseUser user)
     {
         //hideProgressBar();
         if(user != null)
@@ -204,7 +209,7 @@ public class readWrite extends AppCompatActivity
         {
             Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG);
         }
-    }
+    }*/
 
     /*****************************
      * createAccount()
