@@ -218,7 +218,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener
         {
             case R.id.bRegister:
                 //test password before continuing with registration
-                if(true || testPassword())
+                if(testPassword())
                 {
                     createAccount(etUsername.getText().toString(),
                             etPassword.getText().toString(),
