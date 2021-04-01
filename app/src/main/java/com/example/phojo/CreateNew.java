@@ -1,26 +1,35 @@
 package com.example.phojo;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 /**
@@ -34,7 +43,7 @@ import com.google.firebase.storage.UploadTask;
  * @author danallewellyn
  * @author jamiehurd
  */
-public class CreateNew extends AppCompatActivity implements View.OnClickListener
+public class CreateNew extends AppCompatActivity implements OnClickListener
 {
 
     /**********************************
@@ -49,12 +58,11 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
     Uri photo1URI, photo2URI, photo3URI;
 
     // firebase cloud storage refs
-    private Uri mDownloadUrl = null;
+    private Uri fileUri = null;
     private StorageReference mStorageRef;
-
-    //StorageReference storageRef = storage.getReference();
-    //StorageReference mountainImagesRef = storageRef.child("filePathTo/whatPic.jpg");
-
+    private ArrayList<String> photoPaths; // an array to store the paths to the photos on device
+    private int array_position = 0;
+    private FirebaseAuth mAuth;
 
     /**********************************
      * onCreate for CreateNew
@@ -70,8 +78,11 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_create_new);
 
         // get firebase authentication
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        photoPaths = new ArrayList<>();
+        //checkFilePermissions();
+
         // hide the title bar
         try
         {
@@ -107,31 +118,104 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
 
     }
 
+    /**********************************
+     * loadImages
+     * add file paths into the array
+     * as adapted from codingWithMitch
+     ********************************/
+    private void loadImages() throws FileNotFoundException
+    {
+        String path = photoPaths.get(array_position);
+    }
+
+    /**********************************
+     * addFilePaths()
+     * add file paths into the array
+     * as adapted from codingWithMitch
+     ********************************/
+    private void addFilePaths() throws FileNotFoundException {
+        Log.d(TAG, "");
+        String path = System.getenv("EXTERNAL_STORAGE");
+        //photoPaths.add(path+"/");
+        photoPaths.add(fileUri.toString());
+        loadImages();
+    }
+
+    /**********************************
+     * checkFilePermissions()
+     ********************************/
+/*    private void checkFilePermissions()
+    {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.R)
+        {
+            int permissionCheck = UploadActivity.this.checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
+            permissionCheck += UploadActivity.this.checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
+            if (permissionCheck != 0)
+            {
+                this.requestPermissions(new String[]
+                        {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE
+                        } else
+                            {
+                            Log.d(TAG, "No permission needed."));
+            }
+            }
+        }
+    }*/
+
     /********************************
      * onClick for CreateNew's
      * Phojo data upload options
      * @param v
      *******************************/
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
+        @Override
+        public void onClick(View v)
         {
-            case R.id.publishNow:
-                // we will need to add functionality here to get the category and description
-                // and the saved image Uri's.................................................
-                Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
-                openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(openShareRecentActivity, 0);
-                break;
-            case R.id.addPhoto:
-                openGallery();
-                //uploadPhoto(fileUri);
-                break;
-            default:
-                break;
+            switch (v.getId())
+            {
+                case R.id.publishNow:
+                    // we will need to add functionality here to get the category and description
+                    // and the saved image Uri's.................................................
+
+                    //uploadPhoto(fileUri);
+                    if(array_position > 0)
+                    {
+                        array_position -= 1;
+                        try {
+                            loadImages();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String userID = user.getUid();
+                    String name = addPhoto.getText().toString(); // is addPhoto the right editText?
+                    if (!name.equals(""))
+                    {
+                        fileUri = Uri.fromFile(new File(photoPaths.get(array_position)));
+                        mStorageRef = mStorageRef.child("images/users/" + userID + "/" + name +
+                                ".jpg"); //userID is the hash from auth sect. in firebase console!
+                        // consider adding an onsuccess listener here
+                        Toast.makeText(CreateNew.this, "Upload presumed successful, but" +
+                                        "was it?.",
+                                Toast.LENGTH_SHORT).show();
+                        // consider adding a progressDialog in the class which is dismissed on this line
+                        // then, consider adding an onfailurelistener here in case it failed
+                    }
+                    Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
+                    openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivityIfNeeded(openShareRecentActivity, 0);
+                    break;
+                case R.id.addPhoto:
+                    openGallery();
+
+                    break;
+                default:
+                    break;
+            }
         }
-    }
+
 
     /***********************************
      * openGallery for addImages button
@@ -172,7 +256,9 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      **********************************/
     private void uploadPhoto(Uri fileUri) {
         Log.d(TAG, "uploadFromUri:src:" + fileUri.toString());
-        //fileUri = intent.getParcelableExtra(/*a path to a photo??*/"");
+        String photoPath = "/Users/jamiehurd/Desktop/Images/phil_approval.png";
+        Intent intent = new Intent(photoPath);
+        fileUri = intent.getParcelableExtra(/*a path to a photo??*/"");
         // Save the File URI
         if(photo1URI != null)
         {
@@ -187,7 +273,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
             Uri mFileUri3 = photo3URI;
         }
 
-        mDownloadUrl = null;
+        fileUri = null; // needed for reset???
 
         final StorageReference photoRef = mStorageRef.child("photos")
                 .child(fileUri.getLastPathSegment());
