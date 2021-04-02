@@ -106,6 +106,90 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         // END of code for default category dropdown list
     }
 
+
+    public void includesForCreateReference()
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        // ## Create a Reference
+
+        // [START create_storage_reference]
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+        // [END create_storage_reference]
+
+        // [START create_child_reference]
+        // Create a child reference
+        // imagesRef now points to "images"
+        StorageReference imagesRef = storageRef.child("images");
+
+        // Child references can also take paths
+        // spaceRef now points to "images/space.jpg
+        // imagesRef still points to "images"
+        StorageReference spaceRef = storageRef.child(gallery.toString());
+        // [END create_child_reference]
+
+        // ## Navigate with References
+
+        // [START navigate_references]
+        // getParent allows us to move our reference to a parent node
+        // imagesRef now points to 'images'
+        imagesRef = spaceRef.getParent();
+
+        // getRoot allows us to move all the way back to the top of our bucket
+        // rootRef now points to the root
+        StorageReference rootRef = spaceRef.getRoot();
+        // [END navigate_references]
+
+        // [START chain_navigation]
+        // References can be chained together multiple times
+        // earthRef points to 'images/earth.jpg'
+        StorageReference earthRef = spaceRef.getParent().child(gallery.toString());
+
+        // nullRef is null, since the parent of root is null
+        StorageReference nullRef = spaceRef.getRoot().getParent();
+        // [END chain_navigation]
+
+        // ## Reference Properties
+
+        // [START reference_properties]
+        // Reference's path is: "images/space.jpg"
+        // This is analogous to a file path on disk
+        spaceRef.getPath();
+
+        // Reference's name is the last segment of the full path: "space.jpg"
+        // This is analogous to the file name
+        spaceRef.getName();
+
+        // Reference's bucket is the name of the storage bucket that the files are stored in
+        spaceRef.getBucket();
+        // [END reference_properties]
+
+        // ## Full Example
+
+        // [START reference_full_example]
+        // Points to the root reference
+        storageRef = storage.getReference();
+
+        // Points to "images"
+        imagesRef = storageRef.child(gallery.toString());
+
+        // Points to "images/space.jpg"
+        // Note that you can use variables to create child values
+        String fileName = gallery.toString();
+        spaceRef = imagesRef.child(fileName);
+
+        // File path is "images/space.jpg"
+        String path = spaceRef.getPath();
+
+        // File name is "space.jpg"
+        String name = spaceRef.getName();
+
+        // Points to "images"
+        imagesRef = spaceRef.getParent();
+        // [END reference_full_example]
+    }
+
     public void includesForUploadFiles() throws FileNotFoundException
     {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -127,7 +211,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         // [END upload_create_reference]
 
 
-        ImageView imageView = (ImageView)findViewById(android.R.id.text1);
+        ImageView imageView = (ImageView)findViewById(R.id.photo1);
 
         // [START upload_memory]
         // Get the data from an ImageView as bytes
@@ -307,6 +391,12 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
             case R.id.publishNow:
                 // we will need to add functionality here to get the category and description
                 // and the saved image Uri's.................................................
+                try {
+                    includesForUploadFiles();
+                    includesForCreateReference();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
                 openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(openShareRecentActivity, 0);
