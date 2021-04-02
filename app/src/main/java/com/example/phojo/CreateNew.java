@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +19,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -58,11 +63,16 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
     Uri photo1URI, photo2URI, photo3URI;
 
     // firebase cloud storage refs
-    private Uri fileUri = null;
-    private StorageReference mStorageRef;
+    private Uri fileUri;
+    private FirebaseStorage storage;
+    private StorageReference mStorageRef = storage.getReference();
+    FirebaseDatabase myDB;
+    private StorageReference examplePhotoRef = mStorageRef.child("/users/" +
+            "jamiehurd/desktop/images/phil_approval.png");
     private ArrayList<String> photoPaths; // an array to store the paths to the photos on device
     private int array_position = 0;
     private FirebaseAuth mAuth;
+    Button button = (Button) findViewById(R.id.publishNow);
 
     /**********************************
      * onCreate for CreateNew
@@ -76,12 +86,29 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new);
-
+        myDB = FirebaseDatabase.getInstance();
         // get firebase authentication
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         photoPaths = new ArrayList<>();
-        //checkFilePermissions();
+
+        // listen for the click of publishNow
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(ContextCompat.checkSelfPermission(CreateNew.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+                {
+                    selectFile();
+                } else {
+                    ActivityCompat.requestPermissions(CreateNew.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            8);
+                }
+            }
+        });
 
         // hide the title bar
         try
@@ -92,7 +119,7 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
         }
 
         addPhoto = (Button) findViewById(R.id.addPhoto);
-        publishNow = (Button) findViewById(R.id.publishNow);
+        publishNow = (Button) findViewById(R.id.publishNow); // made this global, can erase this line?
 
         publishNow.setOnClickListener(this);
         addPhoto.setOnClickListener(this);
@@ -115,7 +142,62 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
             }
         });
         // END of code for default category dropdown list
+    }
 
+    /**********************************
+     * select()
+     * as adapted from Sayan
+     ********************************/
+    private void selectFile()
+    {
+        Intent intent = new Intent();
+        intent.setType("give_this_a_name");
+        intent.setAction(Intent.ACTION_GET_CONTENT); // get files
+        startActivityForResult(intent, 8);
+    }
+
+    /**********************************
+     * onActivityResult()
+     * as adapted from Sayan
+     ********************************/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+        {
+
+            if(photo1URI==null)
+            {
+                photo1URI = data.getData();
+                photo1.setImageURI(photo1URI);
+            } else if (photo2URI==null)
+            {
+                photo2URI = data.getData();
+                photo2.setImageURI(photo2URI);
+            } else {
+                photo3URI = data.getData();
+                photo3.setImageURI(photo3URI);
+            }
+        }
+    }
+
+    /**********************************
+     * onRequestPermission
+     * as adapated from Sayan
+     ********************************/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 8 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
+        {
+            selectFile();
+        } else
+        {
+            Toast.makeText(CreateNew.this,"Permissions needed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**********************************
@@ -135,34 +217,11 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
      ********************************/
     private void addFilePaths() throws FileNotFoundException {
         Log.d(TAG, "");
-        String path = System.getenv("EXTERNAL_STORAGE");
+        String path = System.getenv("EXTERNAL_STORAGE"); // gets environmental variable, a path
         //photoPaths.add(path+"/");
         photoPaths.add(fileUri.toString());
         loadImages();
     }
-
-    /**********************************
-     * checkFilePermissions()
-     ********************************/
-/*    private void checkFilePermissions()
-    {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.R)
-        {
-            int permissionCheck = UploadActivity.this.checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
-            permissionCheck += UploadActivity.this.checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
-            if (permissionCheck != 0)
-            {
-                this.requestPermissions(new String[]
-                        {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE
-                        } else
-                            {
-                            Log.d(TAG, "No permission needed."));
-            }
-            }
-        }
-    }*/
 
     /********************************
      * onClick for CreateNew's
@@ -170,15 +229,14 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
      * @param v
      *******************************/
         @Override
-        public void onClick(View v)
+        public void onClick (View v)
         {
-            switch (v.getId())
-            {
+            switch (v.getId()) {
                 case R.id.publishNow:
-                    // we will need to add functionality here to get the category and description
-                    // and the saved image Uri's.................................................
+                    mStorageRef.getName().equals(examplePhotoRef.getName());
+                    mStorageRef.getName().equals(examplePhotoRef.getPath());
 
-                    //uploadPhoto(fileUri);
+                    /*uploadPhoto(fileUri);
                     if(array_position > 0)
                     {
                         array_position -= 1;
@@ -202,7 +260,7 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
                                 Toast.LENGTH_SHORT).show();
                         // consider adding a progressDialog in the class which is dismissed on this line
                         // then, consider adding an onfailurelistener here in case it failed
-                    }
+                    }*/
                     Intent openShareRecentActivity = new Intent(this, ShareRecent.class);
                     openShareRecentActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivityIfNeeded(openShareRecentActivity, 0);
@@ -225,28 +283,6 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
         Intent gallery = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE)
-        {
-
-            if(photo1URI==null)
-            {
-                photo1URI = data.getData();
-                photo1.setImageURI(photo1URI);
-            } else if (photo2URI==null)
-            {
-                photo2URI = data.getData();
-                photo2.setImageURI(photo2URI);
-            } else {
-                photo3URI = data.getData();
-                photo3.setImageURI(photo3URI);
-            }
-        }
     }
 
     /***********************************
