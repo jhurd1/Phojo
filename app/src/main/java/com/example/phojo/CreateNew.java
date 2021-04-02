@@ -24,8 +24,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -72,7 +77,8 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
     private ArrayList<String> photoPaths; // an array to store the paths to the photos on device
     private int array_position = 0;
     private FirebaseAuth mAuth;
-    Button button = (Button) findViewById(R.id.publishNow);
+    Button button = (Button) findViewById(R.id.addPhoto);
+    Button button2 = (Button) findViewById(R.id.publishNow);
 
     /**********************************
      * onCreate for CreateNew
@@ -92,8 +98,8 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
         mStorageRef = FirebaseStorage.getInstance().getReference();
         photoPaths = new ArrayList<>();
 
-        // listen for the click of publishNow
-        button.setOnClickListener(new View.OnClickListener()
+        // listen for the click of add photo
+        button.setOnClickListener(new View.OnClickListener() // add photo
         {
             @Override
             public void onClick(View view)
@@ -109,7 +115,20 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
                 }
             }
         });
-
+        button2.setOnClickListener(new View.OnClickListener() // upload the photo
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(fileUri != null)
+                {
+                    uploadPhoto(fileUri);
+                } else
+                {
+                    Toast.makeText(CreateNew.this, "select file", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         // hide the title bar
         try
         {
@@ -144,6 +163,89 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
         // END of code for default category dropdown list
     }
 
+    /***********************************
+     * uploadPhoto
+     * adapted from https://github.com/
+     * firebase/
+     **********************************/
+    private void uploadPhoto(Uri fileUri)
+    {
+        String fileName = System.currentTimeMillis()+"";
+        StorageReference sR = storage.getReference(); // returns path
+        sR.child("what_child").child(fileName).putFile(fileUri).addOnSuccessListener(
+                new OnSuccessListener<UploadTask.TaskSnapshot>()
+                {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                    {
+                        String url = taskSnapshot.getDownloadUrl().toString(); // return url of upload
+                        DatabaseReference myDBref = myDB.getReference();
+                        myDBref.child(fileName).setValue(url).addOnCompleteListener(
+                                new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task)
+                                    {
+                                        if(task.isSuccessful())
+                                        {
+                                            Toast.makeText(CreateNew.this, "success file" +
+                                                    "upload", Toast.LENGTH_SHORT).show();
+                                        } else
+                                        {
+                                            Toast.makeText(CreateNew.this, "fail to upload" +
+                                                    "upload", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                        );
+                    }
+                }
+        ).addOnFailureListener(new OnFailureListener()
+        {
+            @Override
+            public void onFailure(@NonNull Exception e)
+            {
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+
+            }
+        }); // what child? supplant the generic one from data members?
+
+       /* Log.d(TAG, "uploadFromUri:src:" + fileUri.toString());
+        String photoPath = "/Users/jamiehurd/Desktop/Images/phil_approval.png";
+        Intent intent = new Intent(photoPath);
+        fileUri = intent.getParcelableExtra(*//*a path to a photo??*//*"");
+        // Save the File URI
+        if(photo1URI != null)
+        {
+            Uri mFileUri = photo1URI;
+        }
+        if(photo2URI != null)
+        {
+            Uri mFileUri2 = photo2URI;
+        }
+        if(photo3URI != null)
+        {
+            Uri mFileUri3 = photo3URI;
+        }
+
+        fileUri = null; // needed for reset???
+
+        final StorageReference photoRef = mStorageRef.child("photos")
+                .child(fileUri.getLastPathSegment());
+        photoRef.putFile(fileUri).
+                addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>()
+                {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot)
+                    {
+                        Log.i(TAG, "Pushing in progress.");
+                    }
+                });*/
+    }
+
     /**********************************
      * select()
      * as adapted from Sayan
@@ -164,7 +266,15 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE)
+
+        if(requestCode == 8 && resultCode == RESULT_OK && data != null)
+        {
+            fileUri = data.getData(); // uri of file
+        } else
+        {
+            Toast.makeText(CreateNew.this, "select a file", Toast.LENGTH_SHORT).show();
+        }
+        /*if (resultCode == RESULT_OK && requestCode == PICK_IMAGE)
         {
 
             if(photo1URI==null)
@@ -179,7 +289,7 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
                 photo3URI = data.getData();
                 photo3.setImageURI(photo3URI);
             }
-        }
+        }*/
     }
 
     /**********************************
@@ -285,42 +395,4 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
-    /***********************************
-     * uploadPhoto
-     * adapted from https://github.com/
-     * firebase/
-     **********************************/
-    private void uploadPhoto(Uri fileUri) {
-        Log.d(TAG, "uploadFromUri:src:" + fileUri.toString());
-        String photoPath = "/Users/jamiehurd/Desktop/Images/phil_approval.png";
-        Intent intent = new Intent(photoPath);
-        fileUri = intent.getParcelableExtra(/*a path to a photo??*/"");
-        // Save the File URI
-        if(photo1URI != null)
-        {
-            Uri mFileUri = photo1URI;
-        }
-        if(photo2URI != null)
-        {
-            Uri mFileUri2 = photo2URI;
-        }
-        if(photo3URI != null)
-        {
-            Uri mFileUri3 = photo3URI;
-        }
-
-        fileUri = null; // needed for reset???
-
-        final StorageReference photoRef = mStorageRef.child("photos")
-                .child(fileUri.getLastPathSegment());
-        photoRef.putFile(fileUri).
-                addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>()
-                {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot)
-                    {
-                       Log.i(TAG, "Pushing in progress.");
-                    }
-                });
-    }
     }
