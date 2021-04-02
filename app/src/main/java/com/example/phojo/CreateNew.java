@@ -106,7 +106,11 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         // END of code for default category dropdown list
     }
 
-
+    /**********************************
+     * includesForCreateReference()
+     * as adapted from
+     * github.com/firebase example
+     ********************************/
     public void includesForCreateReference()
     {
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -190,6 +194,11 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         // [END reference_full_example]
     }
 
+    /**********************************
+     * includesForUploadFiles()
+     * as adapted from
+     * github.com/firebase example
+     ********************************/
     public void includesForUploadFiles() throws FileNotFoundException
     {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
