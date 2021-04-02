@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,7 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
     private static final String TAG = "Create New Activity";
     Button addPhoto, publishNow;
     ImageView photo1, photo2, photo3;
+    TextView notification;
 
     // data members used for addImages button functionality
     private static final int PICK_IMAGE = 100;
@@ -79,6 +81,7 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
     private FirebaseAuth mAuth;
     Button button = (Button) findViewById(R.id.addPhoto);
     Button button2 = (Button) findViewById(R.id.publishNow);
+    ProgressDialog pDialog;
 
     /**********************************
      * onCreate for CreateNew
@@ -170,9 +173,14 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
      **********************************/
     private void uploadPhoto(Uri fileUri)
     {
+        pDialog = new ProgressDialog(this);
+        pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pDialog.setTitle("Uploading file...");
+        pDialog.show();
         String fileName = System.currentTimeMillis()+"";
         StorageReference sR = storage.getReference(); // returns path
-        sR.child("what_child").child(fileName).putFile(fileUri).addOnSuccessListener(
+
+        sR.child("Uploads").child(fileName).putFile(fileUri).addOnSuccessListener(
                 new OnSuccessListener<UploadTask.TaskSnapshot>()
                 {
                     @Override
@@ -204,12 +212,14 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
             @Override
             public void onFailure(@NonNull Exception e)
             {
-
+                Toast.makeText(CreateNew.this, "fail to store", Toast.LENGTH_SHORT).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-
+                int progress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.
+                        getTotalByteCount());
+                pDialog.setProgress(progress);
             }
         }); // what child? supplant the generic one from data members?
 
@@ -270,6 +280,7 @@ public class CreateNew extends AppCompatActivity implements OnClickListener
         if(requestCode == 8 && resultCode == RESULT_OK && data != null)
         {
             fileUri = data.getData(); // uri of file
+            notification.setText("File selected : " + data.getData().getLastPathSegment());
         } else
         {
             Toast.makeText(CreateNew.this, "select a file", Toast.LENGTH_SHORT).show();
