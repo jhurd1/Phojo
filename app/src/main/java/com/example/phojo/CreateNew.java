@@ -201,9 +201,9 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      ********************************/
     public void includesForUploadFiles() throws FileNotFoundException
     {
-        UploadTask uploadTask1 = uploadImage(R.id.photo1, "photo1");
-        UploadTask uploadTask2 = uploadImage(R.id.photo2, "photo2");
-        UploadTask uploadTask3 = uploadImage(R.id.photo3, "photo3");
+        UploadTask uploadTask1 = uploadImage(R.id.photo1, "photo1.jpg");
+        UploadTask uploadTask2 = uploadImage(R.id.photo2, "photo2.jpg");
+        UploadTask uploadTask3 = uploadImage(R.id.photo3, "photo3.jpg");
         // [END upload_create_reference]
 
 
