@@ -201,7 +201,183 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      ********************************/
     public void includesForUploadFiles() throws FileNotFoundException
     {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        UploadTask uploadTask1 = uploadImage(R.id.photo1, "photo1");
+        UploadTask uploadTask2 = uploadImage(R.id.photo2, "photo2");
+        UploadTask uploadTask3 = uploadImage(R.id.photo3, "photo3");
+        // [END upload_create_reference]
+
+
+//        ImageView imageView = (ImageView)findViewById(R.id.photo1);
+//
+//        // [START upload_memory]
+//        // Get the data from an ImageView as bytes
+//        imageView.setDrawingCacheEnabled(true);
+//        imageView.buildDrawingCache();
+//        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] data = baos.toByteArray();
+
+//        UploadTask uploadTask = mountainsRef.putBytes(data);
+//        uploadTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle unsuccessful uploads
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+//                // ...
+//            }
+//        });
+//        // [END upload_memory]
+//
+//        // [START upload_stream] HOW TO TAP CREATENEW'S GALLERY????
+//        InputStream stream = new FileInputStream(new File(gallery.toString()));
+//
+//        uploadTask = mountainsRef.putStream(stream);
+//        uploadTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle unsuccessful uploads
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+//                // ...
+//            }
+//        });
+//        // [END upload_stream]
+//
+//        // [START upload_file] HOW TO TAP CREATENEW'S GALLERY????
+//        Uri file = Uri.fromFile(new File(gallery.toString()));
+//        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+//        uploadTask = riversRef.putFile(file);
+//
+//        // Register observers to listen for when the download is done or if it fails
+//        uploadTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle unsuccessful uploads
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+//                // ...
+//            }
+//        });
+//        // [END upload_file]
+//
+//        // [START upload_with_metadata]
+//        // Create file metadata including the content type
+//        StorageMetadata metadata = new StorageMetadata.Builder()
+//                .setContentType("image/jpg")
+//                .build();
+//
+//        // Upload the file and metadata  HOW TO TAP CREATENEW'S GALLERY????
+//        uploadTask = storageRef.child(gallery.toString()).putFile(file, metadata);
+//        // [END upload_with_metadata]
+//
+//        // [START manage_uploads]   HOW TO TAP CREATENEW'S GALLERY????
+//        uploadTask = storageRef.child(gallery.toString()).putFile(file);
+//
+//        // Pause the upload
+//        uploadTask.pause();
+//
+//        // Resume the upload
+//        uploadTask.resume();
+//
+//        // Cancel the upload
+//        uploadTask.cancel();
+//        // [END manage_uploads]
+//
+//        // [START monitor_upload_progress]
+//        // Observe state change events such as progress, pause, and resume
+//        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                Log.d(TAG, "Upload is " + progress + "% done");
+//            }
+//        }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+//                Log.d(TAG, "Upload is paused");
+//            }
+//        });
+//        // [END monitor_upload_progress]
+//
+//        // [START upload_complete_example]
+//        // File or Blob     HOW TO TAP CREATENEW'S GALLERY????
+//        file = Uri.fromFile(new File(gallery.toString()));
+//
+//        // Create the file metadata
+//        metadata = new StorageMetadata.Builder()
+//                .setContentType(gallery.toString())  //HOW TO TAP CREATENEW'S GALLERY????
+//                .build();
+//
+//        // Upload file and metadata to the path 'images/mountains.jpg'
+//        uploadTask = storageRef.child("images/"+file.getLastPathSegment()).putFile(file, metadata);
+//
+//        // Listen for state changes, errors, and completion of the upload.
+//        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                Log.d(TAG, "Upload is " + progress + "% done");
+//            }
+//        }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+//                Log.d(TAG, "Upload is paused");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle unsuccessful uploads
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                // Handle successful uploads on complete
+//                // ...
+//            }
+//        });
+//        // [END upload_complete_example]
+//
+//        // [START upload_get_download_url]   HOW TO TAP CREATENEW'S GALLERY????
+//        final StorageReference ref = storageRef.child(gallery.toString());
+//        uploadTask = ref.putFile(file);
+//
+//        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+//            @Override
+//            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+//                if (!task.isSuccessful()) {
+//                    throw task.getException();
+//                }
+//
+//                // Continue with the task to get the download URL
+//                return ref.getDownloadUrl();
+//            }
+//        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Uri> task) {
+//                if (task.isSuccessful()) {
+//                    Uri downloadUri = task.getResult();
+//                } else {
+//                    // Handle failures
+//                    // ...
+//                }
+//            }
+//        });
+        // [END upload_get_download_url]
+    }
+
+    private UploadTask uploadImage(int photoId, String photoName){
+//        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         // [START upload_create_reference]
@@ -209,18 +385,16 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         StorageReference storageRef = storage.getReference();
 
         // Create a reference to "mountains.jpg"
-        StorageReference mountainsRef = storageRef.child(gallery.toString()); // how to tap the gallery here?
+        StorageReference storageReference = storageRef.child(photoName); // how to tap the gallery here?
 
         // Create a reference to 'images/mountains.jpg'
-        StorageReference mountainImagesRef = storageRef.child(gallery.toString()); // how to tap the gallery here?
+        StorageReference storageImagePathReference = storageRef.child("images/" + photoName); // how to tap the gallery here?
 
         // While the file names are the same, the references point to different files
-        mountainsRef.getName().equals(mountainImagesRef.getName());    // true
-        mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
-        // [END upload_create_reference]
+        storageReference.getName().equals(storageImagePathReference.getName());    // true
+        storageReference.getPath().equals(storageImagePathReference.getPath());    // false
 
-
-        ImageView imageView = (ImageView)findViewById(R.id.photo1);
+        ImageView imageView = (ImageView)findViewById(photoId);
 
         // [START upload_memory]
         // Get the data from an ImageView as bytes
@@ -231,162 +405,7 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        UploadTask uploadTask = mountainsRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-            }
-        });
-        // [END upload_memory]
-
-        // [START upload_stream] HOW TO TAP CREATENEW'S GALLERY????
-        InputStream stream = new FileInputStream(new File(gallery.toString()));
-
-        uploadTask = mountainsRef.putStream(stream);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-            }
-        });
-        // [END upload_stream]
-
-        // [START upload_file] HOW TO TAP CREATENEW'S GALLERY????
-        Uri file = Uri.fromFile(new File(gallery.toString()));
-        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-        uploadTask = riversRef.putFile(file);
-
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-            }
-        });
-        // [END upload_file]
-
-        // [START upload_with_metadata]
-        // Create file metadata including the content type
-        StorageMetadata metadata = new StorageMetadata.Builder()
-                .setContentType("image/jpg")
-                .build();
-
-        // Upload the file and metadata  HOW TO TAP CREATENEW'S GALLERY????
-        uploadTask = storageRef.child(gallery.toString()).putFile(file, metadata);
-        // [END upload_with_metadata]
-
-        // [START manage_uploads]   HOW TO TAP CREATENEW'S GALLERY????
-        uploadTask = storageRef.child(gallery.toString()).putFile(file);
-
-        // Pause the upload
-        uploadTask.pause();
-
-        // Resume the upload
-        uploadTask.resume();
-
-        // Cancel the upload
-        uploadTask.cancel();
-        // [END manage_uploads]
-
-        // [START monitor_upload_progress]
-        // Observe state change events such as progress, pause, and resume
-        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                Log.d(TAG, "Upload is " + progress + "% done");
-            }
-        }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d(TAG, "Upload is paused");
-            }
-        });
-        // [END monitor_upload_progress]
-
-        // [START upload_complete_example]
-        // File or Blob     HOW TO TAP CREATENEW'S GALLERY????
-        file = Uri.fromFile(new File(gallery.toString()));
-
-        // Create the file metadata
-        metadata = new StorageMetadata.Builder()
-                .setContentType(gallery.toString())  //HOW TO TAP CREATENEW'S GALLERY????
-                .build();
-
-        // Upload file and metadata to the path 'images/mountains.jpg'
-        uploadTask = storageRef.child("images/"+file.getLastPathSegment()).putFile(file, metadata);
-
-        // Listen for state changes, errors, and completion of the upload.
-        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                Log.d(TAG, "Upload is " + progress + "% done");
-            }
-        }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d(TAG, "Upload is paused");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // Handle successful uploads on complete
-                // ...
-            }
-        });
-        // [END upload_complete_example]
-
-        // [START upload_get_download_url]   HOW TO TAP CREATENEW'S GALLERY????
-        final StorageReference ref = storageRef.child(gallery.toString());
-        uploadTask = ref.putFile(file);
-
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-
-                // Continue with the task to get the download URL
-                return ref.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                } else {
-                    // Handle failures
-                    // ...
-                }
-            }
-        });
-        // [END upload_get_download_url]
+        return storageReference.putBytes(data);
     }
 
     /********************************
@@ -422,8 +441,12 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
      * openGallery for addImages button
      **********************************/
     private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+//        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//        startActivityForResult(gallery, PICK_IMAGE);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
     @Override
