@@ -384,15 +384,8 @@ public class CreateNew extends AppCompatActivity implements View.OnClickListener
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReference();
 
-        // Create a reference to "mountains.jpg"
-        StorageReference storageReference = storageRef.child(photoName); // how to tap the gallery here?
-
         // Create a reference to 'images/mountains.jpg'
-        StorageReference storageImagePathReference = storageRef.child("images/" + photoName); // how to tap the gallery here?
-
-        // While the file names are the same, the references point to different files
-        storageReference.getName().equals(storageImagePathReference.getName());    // true
-        storageReference.getPath().equals(storageImagePathReference.getPath());    // false
+        StorageReference storageReference = storageRef.child("images/" + photoName); // how to tap the gallery here?
 
         ImageView imageView = (ImageView)findViewById(photoId);
 
